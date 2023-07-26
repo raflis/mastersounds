@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^wizard\.master\-sounds\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.wizard\.master\-sounds\.com$
+RewriteRule ^(.*)$ "https\:\/\/master\-sounds\.com\/wizard\/$1" [R=301,L]
+
