@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Sscontroller;
-use App\Models\Admin\CategoryEpisode;
-use App\Models\Admin\CategoryPost;
-use App\Models\Admin\CategorySolution;
-use App\Models\Admin\EpisodeSlider;
-use App\Models\Admin\HomeSlider;
-use App\Models\Admin\ItemEpisode;
-use App\Models\Admin\ItemPost;
-use App\Models\Admin\ItemSolution;
-use App\Models\Admin\PageField;
-use App\Models\Admin\PostSlider;
-use App\Models\Admin\SolutionSlider;
+use Session;
+use Validator;
+use App\Models\Locale;
+use App\Models\Record;
 use App\Models\Contact;
 use App\Models\Country;
 use App\Models\Industry;
-use App\Models\Locale;
 use App\Models\Newsletter;
-use App\Models\Record;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use Session;
-use Validator;
+use Illuminate\Http\Request;
+use App\Models\Admin\Speaker;
+use App\Models\Admin\ItemPost;
+use App\Models\Admin\PageField;
+use App\Models\Admin\HomeSlider;
+use App\Models\Admin\PostSlider;
+use App\Models\Admin\ItemEpisode;
+use App\Models\Admin\CategoryPost;
+use App\Models\Admin\ItemSolution;
+use App\Models\Admin\EpisodeSlider;
+use App\Http\Controllers\Controller;
+use App\Models\Admin\SolutionSlider;
+use App\Models\Admin\CategoryEpisode;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Sscontroller;
+use App\Models\Admin\CategorySolution;
 
 class WebController extends Controller
 {
@@ -77,6 +78,7 @@ class WebController extends Controller
         $send = [];
         $send["__rea_de_inter__s_645bf7546c3e8"] = CategorySolution::Where("id", $category)->value("name1");
         $send["firstName"] = $request->input("name");
+        $send["phoneNumber"] = $request->input("phone");
         $send["lastName"] = $request->input("lastname");
         $send["pa__s_646e72972e4ab"] = $request->input("pais");
         $send["completo_wizwrd_6489e6cb7598d"] = 1;
@@ -149,7 +151,8 @@ class WebController extends Controller
         $catsol = CategorySolution::get();
         $industry = Industry::get();
         $countries = Country::get();
-        return view("web.wizard", compact("catsol", "industry", "countries"));
+        $pagefield = PageField::find(1);
+        return view("web.wizard", compact("catsol", "industry", "countries", "pagefield"));
     }
     public function changeLanguage(Request $request, $id)
     {
@@ -163,11 +166,11 @@ class WebController extends Controller
 
     public function index(Request $request)
     {
-
         $pagefield = PageField::find(Session::get('locale'));
         $home_sliders = HomeSlider::orderBy('order', 'Asc')->get();
         $category_solutions = CategorySolution::orderBy('order', 'Asc')->get();
-        return view('web.index', compact('pagefield', 'home_sliders', 'category_solutions'));
+        $speakers = Speaker::orderBy('order', 'Asc')->get();
+        return view('web.index', compact('pagefield', 'home_sliders', 'category_solutions', 'speakers'));
     }
 
     public function episodes()
@@ -246,6 +249,9 @@ class WebController extends Controller
                     if (!$has) {
                         unset($category_solution->item_solutions[$n]);
                     }
+                    if($is->slug == 'redsis' || $is->slug == 'gbm' || $is->slug == 'ricoh'){
+                        unset($category_solution->item_solutions[$n]);
+                    }
                 }
             }
         } else {
@@ -258,6 +264,9 @@ class WebController extends Controller
                         }
                     }
                     if ($has && $is->countries->count() == 1) {
+                        unset($category_solution->item_solutions[$n]);
+                    }
+                    if($is->slug == 'redsis' || $is->slug == 'gbm' || $is->slug == 'ricoh'){
                         unset($category_solution->item_solutions[$n]);
                     }
                 }
@@ -305,11 +314,13 @@ class WebController extends Controller
         }
         //return view('web.solution', compact('item_solution', 'pagefield', 'countries',"hasValid"));
     }
+
     public function solution($category, $slug, $id)
     {
 
         $item_solution = ItemSolution::where('id', $id)->where('slug', $slug)->first();
         $pagefield = PageField::find(Session::get('locale'));
+        $pagefield_tool = PageField::find(1);
         $countries = Country::get();
         $hasValid = false;
 
@@ -331,7 +342,7 @@ class WebController extends Controller
                 $res = $ssController->call("createLeads", $params);
             }
         }
-        return view('web.solution', compact('item_solution', 'pagefield', 'countries', "hasValid"));
+        return view('web.solution', compact('item_solution', 'pagefield', 'countries', 'hasValid', 'pagefield_tool'));
     }
 
     public function posts()
@@ -477,7 +488,7 @@ class WebController extends Controller
     }
     public function episodeloginsave(Request $request)
     {
-//print_r($request->all());
+        //print_r($request->all());
         $send = [];
         //$episode = $request->input("episode");
         $cat = $request->input("category");

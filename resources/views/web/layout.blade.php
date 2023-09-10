@@ -19,12 +19,14 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:image" content="{{ asset('images/banner.jpg') }}" />
     <meta name="author" content="Marketlogic">
-    
-    
-    <link href="{{ asset('css/web.css?v=1bs3') }}" rel="stylesheet">
-    
-    
 
+    
+    <link href="{{ asset('css/web.css?v=dennis') }}" rel="stylesheet">
+    <link href="{{ asset('css/web2.css?v='.time()) }}" rel="stylesheet">
+    <link href="{{ asset('slick/slick.css') }}" rel="stylesheet">
+    <link href="{{ asset('slick/slick-theme.css') }}" rel="stylesheet">
+    
+    
     @yield('css')
     <script type="text/javascript">
         var _ss = _ss || [];
@@ -55,11 +57,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
     integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <script src="{{ asset('js/main.js?v=1bs23') }}"></script>
+    <script src="{{ asset('slick/slick.min.js') }}"></script>
+    <script src="{{ asset('js/main.js?v='.time()) }}"></script>
     
     @yield('script')
 </body>

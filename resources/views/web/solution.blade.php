@@ -21,11 +21,11 @@
     </div>
 </section>
 
-<section class="sec9">
+<section class="sec9" id="sec9">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="content_all">
+                <div class="content_all" id="form_solution">
                     <div class="content_left">
                         <h2>{{ $item_solution->name }}</h2>
                         <div class="text">
@@ -56,25 +56,42 @@
                     <div class="content_right">
                         @if($hasValid)
                         <div class="text-center">
-                        <a href="{{ route("download",$item_solution->id) }}"  target="_blank" class="h2 link-light"><img src="{{ asset('images/download.png') }}" alt=""></a>
-                        <h2 class="mt-5"><a href="{{ route("download",$item_solution->id)  }}"   target="_blank" class="link-light text-decoration-none">{{ __("global.title.infografiadescarga") }}</a></h2>
+                            <a href="{{ route("download",$item_solution->id) }}"  target="_blank" class="h2 link-light"><img src="{{ asset('images/download.png') }}" alt=""></a>
+                            <h2 class="mt-3"><a href="{{ route("download",$item_solution->id)  }}"   target="_blank" class="link-light text-decoration-none">{{ __("global.title.infografiadescarga") }}</a></h2>
+                            @if(${'item_solution'}->{'link_button' .Session::get('locale')} && ${'item_solution'}->{'button' .Session::get('locale')})
+                            <a target="_blank" href="{{ ${'item_solution'}->{'link_button' .Session::get('locale')} }}" class="btn-vermasblue">{{ ${'item_solution'}->{'button' .Session::get('locale')} }}</a>
+                            @endif
                         </div>
                         @else
                         <h2>{{ __("global.title.descubremas") }}</h2>
 
-
                         <a name="contacto"></a>
-<!-- SharpSpring Form for Master Sounds - Solución CC  -->
-<script type="text/javascript">
-    var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'SzVNSzIztjDSNU1JtNA1MUxO1k00MTDRNUhONko0MU1JS0s0BAA'};
-    ss_form.width = '100%';
-    ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
-     ss_form.hidden = {'solutionname': '{{ $item_solution->name }}','solutionid': '{{ $item_solution->id }}','_token':'{{csrf_token()}}'}; // Modify this for sending hidden variables, or overriding values
-    // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
-    // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
-</script>
-<script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
-<p><a href="{{ $pagefield->file1 }}">{{ __('global.title.sendformtos') }}</a></p>           
+                        @if(Session::get('locale')==1)     
+                        <!-- SharpSpring Form for Master Sounds - Solución CC  -->
+                        <script type="text/javascript">
+                            var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'SzVNSzIztjDSNU1JtNA1MUxO1k00MTDRNUhONko0MU1JS0s0BAA'};
+                            ss_form.width = '100%';
+                            ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
+                             ss_form.hidden = {'solutionname': '{{ $item_solution->name }}','solutionid': '{{ $item_solution->id }}','_token':'{{csrf_token()}}'}; // Modify this for sending hidden variables, or overriding values
+                            // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
+                            // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
+                        </script>
+                        <script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
+                        
+                        @else
+                        <!-- SharpSpring Form for Master Sounds - Solución CC PT  -->
+                        <script type="text/javascript">
+                        var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'MzdIMjO2SDXQNUkyt9A1MTJI1LU0sjTQTTK2SLKwSEtLNTVLBQA'};
+                        ss_form.width = '100%';
+                        ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
+                        // ss_form.hidden = {'field_id': 'value'}; // Modify this for sending hidden variables, or overriding values
+                        // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
+                        // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
+                        </script>
+                        <script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
+                        
+                        @endif
+                        <p><a href="{{ $pagefield->file1 }}">{{ __('global.title.sendformtos') }}</a></p>           
 
                         @endif
                     </div>
@@ -91,9 +108,9 @@
             
                 <div class="infografia">
                     @if($hasValid)
-                    <a href="{{ ${'item_solution'}->{'pdf' .Session::get('locale')} }}" id="btn-infografia">{{ __("global.title.infografia") }} <img src="{{ asset('images/download.png') }}" alt=""></a>
+                    <a target="_blank" href="{{ ${'item_solution'}->{'pdf' .Session::get('locale')} }}" id="btn-infografia">{{ __("global.title.infografia") }} <img src="{{ asset('images/download.png') }}" alt=""></a>
                     @else
-                    <a href="#contacto" id="btn-infografia">{{ __("global.title.infografia") }} <img src="{{ asset('images/download.png') }}" alt=""></a>
+                    <a href="#sec9" id="btn-infografia" data-bs-toggle="tooltip" data-bs-placement="top" title="{!! nl2br(htmlspecialchars_decode(${'pagefield_tool'}->{'tooltip' . Session::get('locale')})) !!}">{{ __("global.title.infografia") }} <img src="{{ asset('images/download.png') }}" alt=""></a>
                     @endif
                 </div>
                 <div class="podcast text-light text-center">

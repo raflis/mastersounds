@@ -31,8 +31,8 @@ $(function(){
   });
 
   $('#btn-infografia').on('click', function(e){
-    e.preventDefault();
-    $('input[name=name]').focus();
+    //e.preventDefault();
+    //$('input[name=name]').focus();
   });
 
 
@@ -65,16 +65,16 @@ $(function(){
         $('.header_top').addClass('d-none');
         $('.header2').addClass('header2_down');
         $('.header').addClass('shadow');
-        $('.sec1').addClass('padding-sec1-9');
-        $('.sec9').addClass('padding-sec1-9');
+        $('.sec1').addClass('padding-sec1-9_BAD');
+        $('.sec9').addClass('padding-sec1-9_BAD');
     }else
     {
         console.log('top');
         $('.header_top').removeClass('d-none');
         $('.header2').removeClass('header2_down');
         $('.header').removeClass('shadow');
-        $('.sec1').removeClass('padding-sec1-9');
-        $('.sec9').removeClass('padding-sec1-9');
+        $('.sec1').removeClass('padding-sec1-9_BAD');
+        $('.sec9').removeClass('padding-sec1-9_BAD');
     }
   })
 
@@ -90,7 +90,63 @@ $(function(){
       if($('.linea2').hasClass('toggle2')){$('.linea2').removeClass('toggle2');}else{$('.linea2').addClass('toggle2');}
       if($('.linea3').hasClass('toggle3')){$('.linea3').removeClass('toggle3');}else{$('.linea3').addClass('toggle3');}
   });
-
   
+
+  $('.carousel-header').slick({
+    cssEase: 'linear',
+    dots: false,
+    arrows: true,
+    infinite: true,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: false,
+    responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }               
+    ]
+  });
+
+  $('.carousel-sec3').slick({
+    dots: false,
+    slidesToShow: 4,
+    centerPadding: '0px',
+    centerMode: false,
+    arrows: true,
+    responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }               
+    ]
+  });
+
+  $('.carousel-sec4').slick({
+    dots: false,
+    slidesToShow: 4,
+    centerPadding: '0px',
+    centerMode: false,
+    arrows: true,
+    responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }               
+    ]
+  });
+
 
 })

@@ -12,13 +12,12 @@ class ItemSolution extends Model
 
     protected $casts = [
         'details' => 'array',
-
     ];
 
     protected $fillable = [
         'category_solution_id', 'name', 'slug', 'slider', 'description1', 'description2',
-        'body1', 'details', 'body2', 'pdf1', 'pdf2', 'podcast1', 'podcast2','podcastlink1', 'podcastlink2','minuserforsale',
-        'order',
+        'body1', 'details', 'body2', 'pdf1', 'pdf2', 'podcast1', 'podcast2', 'podcastlink1', 'podcastlink2', 'minuserforsale',
+        'order', 'button1', 'button2', 'link_button1', 'link_button2',
     ];
 
     public function category_solution()

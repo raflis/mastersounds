@@ -31,7 +31,6 @@
       ], null,['class' => 'custom-select', 'placeholder' => 'Selecciona', 'required']) }}
   </div>
 
-
   </div>
 
     <div class="form-group col-md-5">
@@ -47,7 +46,6 @@
     </div>
     </div>
     </div>
-
 
 <div class="form-group col-sm-12">
     {{ Form::label('body1', 'Detalle [ES]:') }} <code>*</code>
@@ -113,6 +111,26 @@
 <div class="form-group col-sm-12">
     {{ Form::label('podcastlink2', 'Link Podcast [PT]:') }} <code>*</code>
     {{ Form::text('podcastlink2', null, ['class' => 'form-control', 'placeholder' => 'Link Podcast [PT]', 'rows' => 3,'required']) }}
+</div>
+
+<div class="form-group col-sm-12">
+    {{ Form::label('button1', 'Texto del botón CTA [ES]:') }} <code>*</code>
+    {{ Form::text('button1', null, ['class' => 'form-control', 'placeholder' => 'Texto del botón CTA [ES]', 'required']) }}
+</div>
+
+<div class="form-group col-sm-12">
+    {{ Form::label('button2', 'Texto del botón CTA [PT]:') }} <code>*</code>
+    {{ Form::text('button2', null, ['class' => 'form-control', 'placeholder' => 'Texto del botón CTA [PT]', 'required']) }}
+</div>
+
+<div class="form-group col-sm-12">
+    {{ Form::label('link_button1', 'Link del botón CTA [ES]:') }} <code>*</code>
+    {{ Form::text('link_button1', null, ['class' => 'form-control', 'placeholder' => 'Link del botón CTA [ES]', 'required']) }}
+</div>
+
+<div class="form-group col-sm-12">
+    {{ Form::label('link_button2', 'Link del botón CTA [PT]:') }} <code>*</code>
+    {{ Form::text('link_button2', null, ['class' => 'form-control', 'placeholder' => 'Link del botón CTA [PT]', 'required']) }}
 </div>
 
 <div class="px-3 col-sm-12 mb-3">

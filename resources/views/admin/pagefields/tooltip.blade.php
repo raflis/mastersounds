@@ -7,7 +7,7 @@
         <div class="row show-header">
             <div class="col-sm-12">
                 <h1>
-                    <i class="fas fa-home fa-xs"></i> <span>Nosotros</span>
+                    <i class="fas fa-home fa-xs"></i> <span>Texto flotante infografía</span>
                 </h1>
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <span>
-                          Nosotros
+                          Texto flotante infografía
                         </span>
                     </div>
                     {!! Form::model($pagefield, ['route' => ['pagefields.update', 1], 'method' => 'PUT', 'class' => 'needs-validation', 'novalidate']) !!}
@@ -26,54 +26,13 @@
                         </div>
 
                         <div class="form-group col-sm-12">
-                          {!! Form::label('logo_header', 'Logo Header:', ['class' => '']) !!} <strong>(alto de 20px)</strong><code>*</code>
-                          <div class="input-group">
-                            <span class="input-group-btn">
-                                <a id="lfm1" data-input="thumbnail1" data-preview="holder1" class="btn btn-primary text-white">
-                                <i class="far fa-image"></i> Elegir
-                                </a>
-                            </span>
-                            {!! Form::text('logo_header', null, ['class' => 'form-control','id' => 'thumbnail1']) !!}
-                          </div>
-                          <div id="holder1" style="margin-top:15px;max-height:100px;background:#999">
-                            @if(isset($pagefield->logo_header))
-                            <img src="{{ $pagefield->logo_header }}" alt="" style="height:20px">
-                            @endif
-                          </div>
+                          {{ Form::label('tooltip1', 'Texto flotante [ES]:') }}
+                          {{ Form::textarea('tooltip1', null, ['class' => 'form-control', 'placeholder' => 'Texto', 'rows' => 6, 'required']) }}
                         </div>
 
                         <div class="form-group col-sm-12">
-                          {!! Form::label('logo_header_mobile', 'Logo Header Mobile:', ['class' => '']) !!} <strong>(alto de 20px)</strong><code>*</code>
-                          <div class="input-group">
-                            <span class="input-group-btn">
-                                <a id="lfm1m" data-input="thumbnail1m" data-preview="holder1m" class="btn btn-primary text-white">
-                                <i class="far fa-image"></i> Elegir
-                                </a>
-                            </span>
-                            {!! Form::text('logo_header_mobile', null, ['class' => 'form-control','id' => 'thumbnail1m']) !!}
-                          </div>
-                          <div id="holder1m" style="margin-top:15px;max-height:100px;background:#999">
-                            @if(isset($pagefield->logo_header_mobile))
-                            <img src="{{ $pagefield->logo_header_mobile }}" alt="" style="height:20px">
-                            @endif
-                          </div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                          {!! Form::label('logo_footer', 'Logo Footer:', ['class' => '']) !!} <strong>(ancho de 200px)</strong><code>*</code>
-                          <div class="input-group">
-                            <span class="input-group-btn">
-                                <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary text-white">
-                                <i class="far fa-image"></i> Elegir
-                                </a>
-                            </span>
-                            {!! Form::text('logo_footer', null, ['class' => 'form-control','id' => 'thumbnail2']) !!}
-                          </div>
-                          <div id="holder2" style="margin-top:15px;max-height:100px;background:#999">
-                            @if(isset($pagefield->logo_footer))
-                            <img src="{{ $pagefield->logo_footer }}" alt="" style="width:200px">
-                            @endif
-                          </div>
+                          {{ Form::label('tooltip2', 'Texto flotante [PT]:') }}
+                          {{ Form::textarea('tooltip2', null, ['class' => 'form-control', 'placeholder' => 'Texto', 'rows' => 6, 'required']) }}
                         </div>
 
                     </div>
@@ -132,7 +91,6 @@
   </script>
   <script>
     $('#lfm1').filemanager('image', {prefix: route_prefix});
-    $('#lfm1m').filemanager('image', {prefix: route_prefix});
     $('#lfm2').filemanager('image', {prefix: route_prefix});
   </script>
 

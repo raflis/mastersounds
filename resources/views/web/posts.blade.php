@@ -60,7 +60,7 @@
                                     @foreach ($category_posts as $item)
                                         @foreach ($item->item_posts as $ite)
                                             @if (${'ite'}->{'name' . Session::get('locale')} != '#' && ${'ite'}->{'body' . Session::get('locale')} != '#')
-                                                <div class="col    catsol-{{ $item->id }}">
+                                                <div class="col catsol-{{ $item->id }}">
                                                     <div
                                                         class="card bg-transparent  mb-3 rounded rounded-4 h-100 d-inline-block">
                                                         <a
@@ -71,7 +71,7 @@
                                                             <h5 class="card-title text-light">
                                                                 <a class="text-light text-decoration-none"
                                                                 href="{{ route('post', [Str::slug($ite->category_post->name1), $ite->slug, $ite->id]) }}"> {{ ${'ite'}->{'name' . Session::get('locale')} }}</h5></a>
-                                                            <p class="card-text">
+                                                            <p class="card-text textDatePost">
                                                                 {{ \Carbon\Carbon::parse(strtotime($ite->date))->formatLocalized('%d de %B de %Y') }}
                                                             </p>
                                                         </div>

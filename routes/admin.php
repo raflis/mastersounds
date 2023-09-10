@@ -14,6 +14,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('pagefields/social', [App\Http\Controllers\Admin\PageFieldController::class, 'social'])->name('pagefields.social');
     Route::get('pagefields/files/{id}', [App\Http\Controllers\Admin\PageFieldController::class, 'files'])->name('pagefields.files');
     Route::get('pagefields/logos', [App\Http\Controllers\Admin\PageFieldController::class, 'logos'])->name('pagefields.logos');
+    Route::get('pagefields/wizard', [App\Http\Controllers\Admin\PageFieldController::class, 'wizard'])->name('pagefields.wizard');
+    Route::get('pagefields/tooltip', [App\Http\Controllers\Admin\PageFieldController::class, 'tooltip'])->name('pagefields.tooltip');
     Route::resource('pagefields', App\Http\Controllers\Admin\PageFieldController::class)->only(['update']);
     Route::get('users/permission/{id}/edit', [App\Http\Controllers\Admin\UserController::class, 'permissions'])->name('users.permission');
     Route::put('users/permission/{id}/edit', [App\Http\Controllers\Admin\UserController::class, 'updatePermission'])->name('users.permission.update');
@@ -28,6 +30,7 @@ Route::prefix('/admin')->group(function () {
     Route::resource('item_episodes', App\Http\Controllers\Admin\ItemEpisodeController::class);
     Route::resource('category_posts', App\Http\Controllers\Admin\CategoryPostController::class);
     Route::resource('item_posts', App\Http\Controllers\Admin\ItemPostController::class);
+    Route::resource('speakers', App\Http\Controllers\Admin\SpeakerController::class);
 
     Route::get('locale', [Localecontroller::class, 'index'])->name("panel.locale");
     Route::get('locale/{id}', [Localecontroller::class, 'edit'])->name("panel.locale.view");

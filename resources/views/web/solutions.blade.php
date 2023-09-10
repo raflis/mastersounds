@@ -41,17 +41,17 @@ $cat_get = ($cat)?$cat:1;
         <div class="row">
             <div class="col-md-12">
                 <div class="content_all">
-                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
                 
                         @foreach ($category_solutions as $item)
-                        <li class="nav-item mb-5" role="presentation">
+                        <li class="nav-item mb-3" role="presentation">
                             <span class="botonFiltro"
                             data-filter=".catsol-{{$item->id}}"> 
                                 {{  ${'item'}->{'name' .Session::get('locale')} }}
                             </span>
                         </li>
                         @endforeach
-                        <li class="nav-item mb-5" role="presentation">
+                        <li class="nav-item mb-3" role="presentation">
                             <span class="botonFiltro active" data-filter="*">
                                 {{ __("global.title.showall")  }}
                             </span>
@@ -64,11 +64,11 @@ $cat_get = ($cat)?$cat:1;
                         
                             
                                 @foreach ($item->item_solutions as $ite)
-<div class="col    catsol-{{$item->id}}"  >
+<div class="col catsol-{{$item->id}}">
 <div class="card text-bg-light mb-3 rounded rounded-4 h-100 d-inline-block" >
     
     <div class="card-body" style="height:160px">
-      <h5 class="card-title text-bluebs">{{ $ite->name }}</h5>
+      <a class="card-title text-bluebs h5blue" href="{{ route('solution', [Str::slug($ite->category_solution->name1), $ite->slug, $ite->id]) }}">{{ $ite->name }}</a>
       <p class="card-text"> {!! nl2br(htmlspecialchars_decode(  ${'ite'}->{'description' .Session::get('locale')} )) !!}</p>
     </div>
     <div class="card-footer bg-transparent border-0 text-end">

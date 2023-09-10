@@ -70,6 +70,8 @@
                                 </div>
                                 {!! Form::label('details','Nombre:',['class'=>'mt-3']) !!} <code>*</code>
                                 {!! Form::text('details['.$loop->iteration.'][name]',$item["name"],['class'=>'form-control','required']) !!}
+                                {!! Form::label('details','Link botón:',['class'=>'mt-3']) !!} <code>*</code>
+                                {!! Form::text('details['.$loop->iteration.'][link]',$item["link"],['class'=>'form-control','required']) !!}
                                 {!! Form::label('details','Orden:',['class'=>'mt-3']) !!} <code>*</code>
                                 {!! Form::number('details['.$loop->iteration.'][order]',$item["order"],['class'=>'form-control','required']) !!}
                                 <hr class="mx-0 mt-4 border-bottom-dark" style="border:1px solid;background:#000">
@@ -139,6 +141,8 @@
                 
                 '<label for="details" class="mt-3">Nombre:</label> <code>*</code>' +
 								'<input class="form-control" name="details['+i+'][name]" type="text" required>' +
+                '<label for="details" class="mt-3">Link botón:</label> <code>*</code>' +
+								'<input class="form-control" name="details['+i+'][link]" type="text" required>' +
                 '<label for="details" class="mt-3">Orden:</label> <code>*</code>' +
 								'<input class="form-control" name="details['+i+'][order]" type="number" required>' +
                 

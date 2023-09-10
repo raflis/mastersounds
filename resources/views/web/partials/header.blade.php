@@ -10,8 +10,8 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark text-bg-darkmenu">
     <div class="container-fluid">
         <a href="{{ route('index') }}" class="navbar-brand">
-            <img src="/images/logo.png" alt="" style="height:17px" class="img-fluid d-none d-md-block">
-            <img src="/images/logomobile.png" alt="" style="width:75%" class="img-fluid d-inline-block d-md-none">
+            <img src="{{ $pagefield->logo_header }}" alt="" style="height:17px" class="img-fluid d-none d-md-block">
+            <img src="{{ $pagefield->logo_header_mobile }}" alt="" style="width:75%" class="img-fluid d-inline-block d-md-none">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,8 +49,6 @@
 </nav>
 
 
-
-
 <section class="header_mobile">
     <div class="container">
         <div class="row">
@@ -59,7 +57,7 @@
                     <div class="content-left">
                         <div class="logo">
                             <a href="{{ route('index') }}">
-                                <img src="{{ $pagefield->logo_header }}" alt="">
+                                <img src="{{ $pagefield->logo_header_mobile }}" alt="">
                             </a>
                         </div>
                     </div>

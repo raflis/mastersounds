@@ -1,34 +1,36 @@
 @extends('web.layout')
 
 @section('content')
-    <section class="sec7">
 
-
-        <div class="container pt-5">
-            <div class="row">
-                <div class="col-6 offset-3 col-md-4 offset-md-4">
-
-                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
-                        aria-valuemax="100">
-                        <div class="progress-bar" id="progressValue"></div>
+<section class="sec1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 px-0">
+                <div class="carousel-header">
+                    <div class="item" id="item_wizard"
+                        style="background-image: url('{{ $pagefield->wizard_banner }}')">
+                        <div class="text2">
+                            <p>
+                                {!! htmlspecialchars_decode(${'pagefield'}->{'wizard_text' . Session::get('locale')}) !!}
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 offset-3 col-md-4 offset-md-4 text-center">
-                    <p class="text-light" id="progressStep"></p>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+    <section class="sec7">
+        
         <div class="contactform">
             <form id="wizard" method="post" action="{{ route('wizard.post') }}">
                 {{ csrf_field() }}
                 <input type="hidden" name="step2select" id="step2select" value="" />
                 <input type="hidden" name="step3select" id="step3select" value="" />
                 <input type="hidden" name="step4select" id="step4select" value="" />
-                <div class="container mt-5">
-
-                    <div class="row ">
-
-
+                <div class="container mt-1">
+                    <div class="row">
                         <section id="step-0" class="step">
                             <div class="col-12 text-center mb-5 text-light">
                                 <a name="comenzar"></a>
@@ -78,7 +80,6 @@
                                     {{ __('global.title.youmustchoosecategory') }}
                                 </div>
                                 <div class="row  d-flex justify-content-center">
-
                                     @foreach ($catsol as $cat)
                                         <div class="col-6 col-md-2">
                                             <div class="card  h-100 step2select" data-item="{{ $cat->id }}">
@@ -87,7 +88,8 @@
                                                     <img width="96" src="{{ $cat->iconwizard }}" />
                                                 </div>
                                                 <div class="card-footer text-center">
-                                                    {{ ${'cat'}->{'name' . Session::get('locale')} }}</div>
+                                                    {{ ${'cat'}->{'name' . Session::get('locale')} }}
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
@@ -112,7 +114,8 @@
                                                         src="/assets/png/{{ $ind->imagewizard }}.png" />
                                                 </div>
                                                 <div class="card-footer text-center">
-                                                    {{ ${'ind'}->{'name' . Session::get('locale')} }}</div>
+                                                    {{ ${'ind'}->{'name' . Session::get('locale')} }}
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
@@ -132,7 +135,6 @@
                         </section>
                         <section id="step-3" class="step d-none">
                             <div class="col-12 text-center mb-5 text-light">
-
                                 <h3>{{ __('global.title.usernumberrequired') }}</h3>
                             </div>
                             <div class="col-12  col-md-8 offset-md-2 text-center">
@@ -167,17 +169,11 @@
                                             <div class="card-footer text-center">+101</div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </section>
-
                     </div>
-
-
-
-
-                    <div class="row mt-5 pt-5">
+                    <div class="row mt-4">
                         <div class="col-12  col-md-6 offset-md-3">
                             <div class="mb-3 text-center">
                                 <span class="btn btn-sm  btn-enviar btn-primary disabled"
@@ -188,8 +184,20 @@
                         </div>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-6 offset-3 col-md-4 offset-md-4">
+                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100">
+                        <div class="progress-bar" id="progressValue"></div>
+                    </div>
+                </div>
+                <div class="col-6 offset-3 col-md-4 offset-md-4 text-center">
+                    <p class="text-light" id="progressStep"></p>
+                </div>
+            </div>
         </div>
     @endsection
 

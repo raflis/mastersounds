@@ -34,6 +34,14 @@
             <i class="fas fa-home text-gray pr-1"></i> Inicio [PT]
         </a>
         @endif
+        <a class="nav-link @if(preg_match("/speakers/", Route::currentRouteName())) active @endif" 
+        href="{{ route('speakers.index') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Speakers
+        </a>
+        <a class="nav-link @if(preg_match("/pagefields.wizard/", Route::currentRouteName())) active @endif" 
+        href="{{ route('pagefields.wizard') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Wizard
+        </a>
         @if (validatePermission('pagefields.social', Auth::user()->permissions) == true)
         <a class="nav-link @if(preg_match("/pagefields.social/", Route::currentRouteName())) active @endif" 
         href="{{ route('pagefields.social') }}">
@@ -92,6 +100,10 @@
             <i class="fas fa-home text-gray pr-1"></i> Soluciones
         </a>
         @endif
+        <a class="nav-link @if(preg_match("/pagefields.tooltip/", Route::currentRouteName())) active @endif" 
+        href="{{ route('pagefields.tooltip') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Texto flotante Infografía
+        </a>
 
         <div class="sidenav-menu-heading">Episodios</div>
         @if (validatePermission('category_episodes.index', Auth::user()->permissions) == true)

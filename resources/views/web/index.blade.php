@@ -87,27 +87,27 @@
                         <h2>
                             {{ $pagefield->title2 }}
                         </h2>
-                    </div>
-                    <div class="col-12  justify-content-center">
-                        <div class="card-group g-0 bg_carousel text-light p-5">
-                            
-                                @if (!empty($pagefield->details))
-                                    @foreach ($pagefield->details as $item)
-
-                                    <div class="card bg-transparent text-center h-100">
-                                        <div class="card-header ">
-                                        <img src="{{ $item['image'] }}" alt="" class="mb-4 mx-auto" style="max-height: 64px">
+                        <div class="bg_carousel">
+                            <div class="carousel-sec3">
+                                @foreach ($pagefield->details as $item)
+                                <div class="item">
+                                    <div class="item_">
+                                        <div class="image">
+                                            <a href="{{ $item['link'] }}">
+                                                <img src="{{ $item['image'] }}" alt="">
+                                            </a>
                                         </div>
-                                        <div class="card-body">
-                                          <h6 class="card-title">{{ $item['name'] }}</h6>
-                                          
-                                        </div>
-                                      </div>
-                                      
-                                    @endforeach
-                                @endif
+                                        <p>
+                                            {{ $item['name'] }}
+                                        </p>
+                                    </div>
+                                    <div class="link">
+                                        <a href="{{ $item['link'] }}" class="btn-vermasblue">{{ __('global.title.vermas') }}</a>
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
-                        
+                        </div>
                         <p class="text">
                             {!! nl2br(htmlspecialchars_decode($pagefield->description2)) !!}
                             <br><br>
@@ -123,100 +123,40 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="content_all">
+                        <div class="content_all0">
                             <h2>
                                 {{ $pagefield->title3 }}
                             </h2>
-                        </div>
-                        </div>
-                        </div>
-                        
-                        
-                        <div class="row speakerlist">
-                            <div class="col-6 col-md-4 text-light text-center">
+                            <div class="carousel-sec4">
+                                @foreach ($speakers as $item)
                                 <div class="item">
                                     <div class="image">
-                                        <img src="{{ asset('images/speaker1.png') }}" class="img-fluid" alt="">
+                                        <a href="{{ ${'item'}->{'button_link'.Session::get('locale')} }}">
+                                            <img src="{{ $item->image }}" alt="">
+                                        </a>
                                     </div>
                                     <div class="text">
-                                        <img src="{{ asset('images/pe.png') }}" alt="" width="32">
-                                        <h6>Jaime Sotomayor</h6>
-                                        <p>{{ __('global.title.jaimesotomayor') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-4 text-light text-center">
-                                <div class="item">
-                                    <div class="image">
-                                        <img src="{{ asset('images/speaker2.png') }}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <img src="{{ asset('images/co.png') }}" alt="" width="32">
-                                        
-                                            <h6>Ana María Quintero</h6>
-                                            <p>
-                                            {{ __('global.title.anamariaquintero') }}
+                                        <img src="{{ $item->flag }}" alt="">
+                                        <p class="p1">
+                                            {{ $item->name }}
+                                        </p>
+                                        <p class="p2">
+                                            {{ ${'item'}->{'position'.Session::get('locale')} }}
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-4 text-light text-center">
-                                <div class="item">
-                                    <div class="image">
-                                        <img src="{{ asset('images/speaker3.png') }}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <img src="{{ asset('images/mx.png') }}" alt="" width="32">
-                                            <h6>Jose Antonio Lanzguerrero</h6>
-                                            <p>
-                                            {{ __('global.title.joseantonio') }}
-                                        </p>
+                                    <div class="link">
+                                        <a href="{{ ${'item'}->{'button_link'.Session::get('locale')} }}" class="btn-vermasblue">{{ ${'item'}->{'button_name'.Session::get('locale')} }}</a>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            <div class="col-6 col-md-4 text-light text-center">
-                                <div class="item">
-                                    <div class="image">
-                                        <img src="{{ asset('images/speaker4.png') }}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <img src="{{ asset('images/pe.png') }}" alt="" width="32">
-                                        
-                                            <h6>Nicolás Valcarcel</h6>
-                                            <p>
-                                            {{ __('global.title.nicolas') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-4 text-light text-center">
-                                <div class="item">
-                                    <div class="image">
-                                        <img src="{{ asset('images/speaker5.png') }}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <img src="{{ asset('images/co.png') }}" alt="" width="32">
-                                    
-                                            <h6>Camila Navarro</h6>
-                                            <p>
-                                            {{ __('global.title.camila') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            <p>
+                                {!! nl2br(htmlspecialchars_decode($pagefield->description3)) !!}
+                            </p>
+                            <a href="{{ route('episodes') }}" class="btn btn4">{{ __('global.title.volumeupdo') }}</a>
                         </div>
-                        
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="content_all">
-                        <p>
-                            {!! nl2br(htmlspecialchars_decode($pagefield->description3)) !!}
-                        </p>
-                        <a href="{{ route('episodes') }}" class="btn btn4">{{ __('global.title.volumeupdo') }}</a>
                     </div>
                 </div>
-                </div>
-            </div>
             </div>
         </section>
     @endif

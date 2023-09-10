@@ -42,15 +42,15 @@
                     <div class="content_all">
 
 
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
                             @foreach ($category_episodes as $item)
-                                <li class="nav-item mb-5" role="presentation">
+                                <li class="nav-item mb-3" role="presentation">
                                     <span class="botonFiltro" data-filter=".catsol-{{ $item->id }}">
                                         {{ ${'item'}->{'name' . Session::get('locale')} }}
                                     </span>
                                 </li>
                             @endforeach
-                            <li class="nav-item mb-5" role="presentation">
+                            <li class="nav-item mb-3" role="presentation">
                                 <span class="botonFiltro active" data-filter="*">
                                     {{ __('global.title.showall') }}
                                 </span>
@@ -64,26 +64,26 @@
                                     @foreach ($category_episodes as $item)
                                     @foreach ($item->item_episodes as $ite)
                                         @if (${'ite'}->{'name' . Session::get('locale')} != '#' && ${'ite'}->{'body' . Session::get('locale')} != '#')
-                                            <div class="col    catsol-{{ $item->id }}">
+                                            <div class="col catsol-{{ $item->id }}">
                                                 <div
-                                                    class="card bg-transparent  mb-3 rounded rounded-4 h-100 d-inline-block">
+                                                    class="card bg-transparent mb-3 rounded rounded-4 h-100 d-inline-block">
                                                     <a
                                                         href="{{ route('episode', [Str::slug($ite->category_episode->name1), $ite->slug, $ite->id]) }}"><img
                                                             src="{{ $ite->image }}" class="card-img-top rounded rounded-4"
                                                             alt=" {{ $ite->name }}"></a>
-                                                    <div class="card-body" style="height:160px">
+                                                    <div class="card-body" style="height:180px">
                                                         <div class="row ">
                                                             <div class="col-3">
                                                                 <img src="{{ $ite->autor_image }}" class="img-fluid"
                                                                     alt="{{ $ite->autor_name }}">
                                                             </div>
                                                             <div class="col-9">
-                                                                <h5 class="card-title text-light lh-lg">
+                                                                <h5 class="card-title text-light aepisode">
                                                                     <a class="text-light text-decoration-none"
                                                                         href="{{ route('episode', [Str::slug($ite->category_episode->name1), $ite->slug, $ite->id]) }}">
                                                                         {{ $ite->name }}
                                                                 </h5></a>
-                                                                <p class="card-text text-primary lh-lg">
+                                                                <p class="card-text text-primary mb-0">
                                                                     {{ $ite->autor_name }}
                                                                 </p>
                                                                 <p class="card-text text-primary lh-lg">
