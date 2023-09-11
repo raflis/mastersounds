@@ -15,6 +15,7 @@ Route::prefix('/admin')->group(function () {
     Route::get('pagefields/files/{id}', [App\Http\Controllers\Admin\PageFieldController::class, 'files'])->name('pagefields.files');
     Route::get('pagefields/logos', [App\Http\Controllers\Admin\PageFieldController::class, 'logos'])->name('pagefields.logos');
     Route::get('pagefields/wizard', [App\Http\Controllers\Admin\PageFieldController::class, 'wizard'])->name('pagefields.wizard');
+    Route::get('pagefields/wizard_result', [App\Http\Controllers\Admin\PageFieldController::class, 'wizard_result'])->name('pagefields.wizard_result');
     Route::get('pagefields/tooltip', [App\Http\Controllers\Admin\PageFieldController::class, 'tooltip'])->name('pagefields.tooltip');
     Route::resource('pagefields', App\Http\Controllers\Admin\PageFieldController::class)->only(['update']);
     Route::get('users/permission/{id}/edit', [App\Http\Controllers\Admin\UserController::class, 'permissions'])->name('users.permission');

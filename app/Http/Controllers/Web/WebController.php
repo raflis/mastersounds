@@ -57,6 +57,7 @@ class WebController extends Controller
     }
     public function wizardpost(Request $request)
     {
+        $pagefield = Pagefield::find(1);
         //"_token" => "V7eWGiIKavpacHZkXkHZZ7fVjBD0MXTysZq6LcBr"
         //"step2select" => "1"
         //"step3select" => "5"
@@ -67,28 +68,29 @@ class WebController extends Controller
         //"pais" => "Brasil"
         //"industry" => "nombre de la otra industria"
         $category = $request->input("step2select");
-        $industry = $request->input("step3select");
-        $minuser = $request->input("step4select");
+        /*$industry = $request->input("step3select");
+        $minuser = $request->input("step4select");*/
         //$solutions = ItemSolution::where("minuserforsale","<=",$minuser)->where("category_solution_id",$category)->get();
-        $country = Country::Where("name", $request->input("pais"))->pluck("id")->first();
-        $solutions = ItemSolution::join("solution_industry", "solution_industry.solution_id", "item_solutions.id")->join("solution_country", "solution_country.solution_id", "item_solutions.id")->where("minuserforsale", "<=", $minuser)->where("category_solution_id", $category)->whereRaw("industry_id=" . $industry)->whereRaw("country_id=" . $country)->select('item_solutions.*')->distinct()->get();
+        /*$country = Country::Where("name", $request->input("pais"))->pluck("id")->first();
+        $solutions = ItemSolution::join("solution_industry", "solution_industry.solution_id", "item_solutions.id")->join("solution_country", "solution_country.solution_id", "item_solutions.id")->where("minuserforsale", "<=", $minuser)->where("category_solution_id", $category)->whereRaw("industry_id=" . $industry)->whereRaw("country_id=" . $country)->select('item_solutions.*')->distinct()->get();*/
 
         $ssController = new Sscontroller();
         $res = $ssController->call("getLeads", ["where" => ["emailAddress" => $request->input("email")]]);
         $send = [];
+        $send["emailAddress"] = $request->input("email");
         $send["__rea_de_inter__s_645bf7546c3e8"] = CategorySolution::Where("id", $category)->value("name1");
         $send["firstName"] = $request->input("name");
         $send["phoneNumber"] = $request->input("phone");
         $send["lastName"] = $request->input("lastname");
         $send["pa__s_646e72972e4ab"] = $request->input("pais");
         $send["completo_wizwrd_6489e6cb7598d"] = 1;
-        $send["__usuarios_necesitas__647e451a6eab1"] = $minuser == 10 ? "10" : ($minuser == 100 ? "-100" : "+100");
+        /*$send["__usuarios_necesitas__647e451a6eab1"] = $minuser == 10 ? "10" : ($minuser == 100 ? "-100" : "+100");
         if ($industry == 12) {
             $send["otra_industria_648156d7044be"] = $request->input("industry");
             $send["industria_645bf7cf8de92"] = Industry::Where("id", $industry)->value("name1");
         } else {
             $send["industria_645bf7cf8de92"] = Industry::Where("id", $industry)->value("name1");
-        }
+        }*/
 
         if (isset($res->result->lead[0]->id)) {
             $send["id"] = $res->result->lead[0]->id;
@@ -99,14 +101,13 @@ class WebController extends Controller
             $res = $ssController->call("updateLeads", $params);
         } else {
             //$send["soluci__n_contactada_647f82d8980ff"] = $solucion;
-
             $objects[] = (object) $send;
             $params = array('objects' => $objects);
             $res = $ssController->call("createLeads", $params);
         }
         session()->put('ValidEmail', $request->input("email"));
 
-        $solution_sliders = false;
+        /*$solution_sliders = false;
         $category_solutions = false;
         if ($solutions->isEmpty()) {
             $solution_sliders = SolutionSlider::orderBy('order', 'Asc')->get();
@@ -142,9 +143,9 @@ class WebController extends Controller
                     }
                 }
             }
-        }
+        }*/
 
-        return view("web.wizardresults", compact("solutions", 'solution_sliders', 'category_solutions'));
+        return view("web.wizardresults", compact('pagefield'));
     }
     public function wizard()
     {

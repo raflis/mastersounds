@@ -24,6 +24,8 @@ class PageField extends Model
         'link6', 'link7', 'link8',
         'wizard_banner', 'wizard_text1', 'wizard_text2',
         'tooltip1', 'tooltip2',
+        'wizard_result_text1', 'wizard_result_text2', 'wizard_result_link1', 'wizard_result_link2',
+        'wizard_result_button1', 'wizard_result_button2',
     ];
 
     public static function findOrCreate($id)

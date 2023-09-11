@@ -38,9 +38,13 @@
         href="{{ route('speakers.index') }}">
             <i class="fas fa-home text-gray pr-1"></i> Speakers
         </a>
-        <a class="nav-link @if(preg_match("/pagefields.wizard/", Route::currentRouteName())) active @endif" 
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.wizard'))) active @endif" 
         href="{{ route('pagefields.wizard') }}">
             <i class="fas fa-home text-gray pr-1"></i> Wizard
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.wizard_result'))) active @endif" 
+        href="{{ route('pagefields.wizard_result') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Wizard Gracias
         </a>
         @if (validatePermission('pagefields.social', Auth::user()->permissions) == true)
         <a class="nav-link @if(preg_match("/pagefields.social/", Route::currentRouteName())) active @endif" 

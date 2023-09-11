@@ -115,16 +115,13 @@
                 </div>
                 <div class="podcast text-light text-center">
                     <img src="{{ asset('images/podcast.png') }}" alt="">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2 px-0">
                     <h3>{{ 'Podcast' }}</h3>
-                    <h5><a href="{{ ${'item_solution'}->{'podcastlink' .Session::get('locale')} }}" class="link-light text-decoration-none">
+                    <p>
+                        <a href="{{ ${'item_solution'}->{'podcastlink' .Session::get('locale')} }}" class="link-light text-decoration-none">
                         {!! nl2br(htmlspecialchars_decode(${'item_solution'}->{'podcast' .Session::get('locale')})) !!}
                         </a>
-                    </h5>
+                    </p>
                 </div>
-            </div>
-            </div>
             </div>
         </div>
     </div>

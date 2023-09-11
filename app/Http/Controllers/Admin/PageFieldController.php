@@ -20,7 +20,7 @@ class PageFieldController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('isadmin');
-        $this->middleware('permissions')->except(['store', 'update', 'destroy', 'wizard', 'tooltip']);
+        $this->middleware('permissions')->except(['store', 'update', 'destroy', 'wizard', 'tooltip', 'wizard_result']);
     }
 
     public function home($id)
@@ -59,6 +59,12 @@ class PageFieldController extends Controller
     {
         $pagefield = PageField::find(1);
         return view('admin.pagefields.tooltip', compact('pagefield'));
+    }
+
+    public function wizard_result()
+    {
+        $pagefield = PageField::find(1);
+        return view('admin.pagefields.wizard_result', compact('pagefield'));
     }
 
     public function index()

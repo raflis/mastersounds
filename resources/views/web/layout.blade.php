@@ -20,8 +20,7 @@
     <meta property="og:image" content="{{ asset('images/banner.jpg') }}" />
     <meta name="author" content="Marketlogic">
 
-    
-    <link href="{{ asset('css/web.css?v=dennis') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css?v=0') }}" rel="stylesheet">
     <link href="{{ asset('css/web2.css?v='.time()) }}" rel="stylesheet">
     <link href="{{ asset('slick/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('slick/slick-theme.css') }}" rel="stylesheet">
