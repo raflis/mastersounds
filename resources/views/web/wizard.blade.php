@@ -40,31 +40,43 @@
                     <div class="col-md-5 mb-3">
                         <label for="nombre"
                             class="form-label text-light">{{ __('global.title.yourname') }}</label>
-                        <input type="text" class="form-control bg-light text-primary" id="name"
-                            value="" name="name" required aria-describedby="name">
+                        <input type="text" class="form-control" id="name"
+                            value="" name="name" required aria-describedby="name" placeholder="{{ __('global.title.yourname') }}">
                     </div>
                     <div class="col-md-5 mb-3">
                         <label for="lastname"
                             class="form-label text-light">{{ __('global.title.yourlastname') }}</label>
-                        <input type="text" class="form-control bg-light text-primary" id="lastname"
-                            value="" name="lastname" required aria-describedby="lastname">
+                        <input type="text" class="form-control" id="lastname"
+                            value="" name="lastname" required aria-describedby="lastname" placeholder="{{ __('global.title.yourlastname') }}">
                     </div>
                     <div class="col-md-5 mb-3">
                         <label for="email"
                             class="form-label text-light">{{ __('global.title.youremail') }}</label>
-                        <input type="email" class="form-control bg-light text-primary" id="email"
-                            value="" name="email" required aria-describedby="email">
+                        <input type="email" class="form-control" id="email"
+                            value="" name="email" required aria-describedby="email" placeholder="{{ __('global.title.youremail') }}">
                     </div>
                     <div class="col-md-5 mb-3">
-                        <label for="pais"
-                            class="form-label text-light">{{ __('global.title.yourcountry') }}</label>
-                        <select class="form-select bg-light text-primary" aria-label="Default select example"
-                            id="pais" name="pais" required>
-                            <option selected value="0">{{ __('global.title.selectyourcountry') }}</option>
-                            @foreach($countries as $country)
-                            <option value="{{$country->name}}">{{$country->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="phone"
+                            class="form-label text-light">{{ __('global.title.yourphone') }}</label>
+                        <div class="phone_contact d-flex">
+                            <div class="dropdown drop_flags">
+                                <button class="btn btn-flag dropdown-toggle" type="button" id="drop_flags" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="flag_user" src="{{ asset('images/flags/pe.png') }}" alt="">
+                                    <input type="hidden" name="flag_dial_code" id="flag_dial_code" value="+51">
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="drop_flags">
+                                    @foreach ($flags as $flag)
+                                    <li>
+                                        <button id="flag_selec" class="dropdown-item" type="button" flag_dial_code="{{ $flag->dial_code }}" imagen_bandera="{{ asset('images/flags/'.$flag->image) }}" placeholder_bandera="{{ $flag->placeholder }}">
+                                            <img src="{{ asset('images/flags/'.$flag->image) }}" alt="">
+                                            <p>{{ $flag->name }} <span>({{ $flag->dial_code }})</span></p>
+                                        </button>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" id="phone" name="phone" required aria-describedby="phone" placeholder="+51999666333">
+                        </div>
                     </div>
                     <div class="col-12 text-center mb-3 mt-3 text-light">
                         <h3>{{ __('global.title.choosecategory') }}</h3>
@@ -130,6 +142,7 @@
                 return false;
             }
         }
+
         jQuery(function() {
 
             var sigue = false;
@@ -138,7 +151,7 @@
             jQuery("#wizNext").click(function() {
 
                 if (jQuery("#name").val().trim() == "" || jQuery("#lastname").val().trim() == "" ||
-                    jQuery("#email").val().trim() == "" || jQuery("#pais").val().trim() == 0 || !(
+                    jQuery("#email").val().trim() == "" || jQuery("#flag_dial_code").val().trim() == 0 || jQuery("#phone").val().trim() == 0 || !(
                         ValidateEmail(jQuery("#email").val().trim()))) {
                     sigue = false;
                     $("#wizard")[0].reportValidity();
@@ -178,8 +191,17 @@
                 }
                 jQuery(".step2select .card-body").removeClass("text-bg-primary").addClass("text-bg-light");
                 jQuery(this).find(".card-body", 0).addClass("text-bg-primary").removeClass("text-bg-light");
-
             });
+
+            $('[id*=flag_selec]').on('click', function(){
+                var imagen_bandera = $(this).attr('imagen_bandera');
+                var placeholder_bandera = $(this).attr('placeholder_bandera');
+                var flag_dial_code = $(this).attr('flag_dial_code');
+                $('.flag_user').attr('src', imagen_bandera);
+                $('#phone').attr('placeholder', placeholder_bandera);
+                $('input[name=flag_dial_code]').val(flag_dial_code);
+                console.log(imagen_bandera);
+            })
 
         });
     </script>

@@ -30,111 +30,42 @@
         </div>
     </section>
 
-    @php
-        $cat = Request::get('cat');
-        $cat_get = $cat ? $cat : 1;
-    @endphp
-
-    <section class="sec5">
+    <section class="sec5_2">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="content_all">
-
-
-                        <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
-                            @foreach ($category_episodes as $item)
-                                <li class="nav-item mb-3" role="presentation">
-                                    <span class="botonFiltro" data-filter=".catsol-{{ $item->id }}">
-                                        {{ ${'item'}->{'name' . Session::get('locale')} }}
-                                    </span>
-                                </li>
+                    <div class="content">
+                        <div class="items_link">
+                            @foreach ($category_episodes_all as $item)
+                            <a href="{{ route('episodes', ['cat' => Str::slug(${'item'}->{'name' . Session::get('locale')}), 'id' => $item->id]) }}" class="botonFiltro {{ (Request::is('episodios/'.Str::slug(${'item'}->{'name' . Session::get('locale')}).'/'.$item->id)) ? 'active' : '' }}">{{ ${'item'}->{'name' . Session::get('locale')} }}</a>
                             @endforeach
-                            <li class="nav-item mb-3" role="presentation">
-                                <span class="botonFiltro active" data-filter="*">
-                                    {{ __('global.title.showall') }}
-                                </span>
-                            </li>
-                        </ul>
-                        <div class="contitems">
-                            <div class=" " id="pills-tabContent">
-                                <div class="row row-cols-1 row-cols-md-3 g-4 d-flex align-items-stretch itemfilter">
-
-
-                                    @foreach ($category_episodes as $item)
-                                    @foreach ($item->item_episodes as $ite)
-                                        @if (${'ite'}->{'name' . Session::get('locale')} != '#' && ${'ite'}->{'body' . Session::get('locale')} != '#')
-                                            <div class="col catsol-{{ $item->id }}">
-                                                <div
-                                                    class="card bg-transparent mb-3 rounded rounded-4 h-100 d-inline-block">
-                                                    <a
-                                                        href="{{ route('episode', [Str::slug($ite->category_episode->name1), $ite->slug, $ite->id]) }}"><img
-                                                            src="{{ $ite->image }}" class="card-img-top rounded rounded-4"
-                                                            alt=" {{ $ite->name }}"></a>
-                                                    <div class="card-body" style="height:180px">
-                                                        <div class="row ">
-                                                            <div class="col-3">
-                                                                <img src="{{ $ite->autor_image }}" class="img-fluid"
-                                                                    alt="{{ $ite->autor_name }}">
-                                                            </div>
-                                                            <div class="col-9">
-                                                                <h5 class="card-title text-light aepisode">
-                                                                    <a class="text-light text-decoration-none"
-                                                                        href="{{ route('episode', [Str::slug($ite->category_episode->name1), $ite->slug, $ite->id]) }}">
-                                                                        {{ $ite->name }}
-                                                                </h5></a>
-                                                                <p class="card-text text-primary mb-0">
-                                                                    {{ $ite->autor_name }}
-                                                                </p>
-                                                                <p class="card-text text-primary lh-lg">
-                                                                    {{ \Carbon\Carbon::parse(strtotime($ite->date))->formatLocalized('%d de %B de %Y') }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                    @endforeach
-
-
+                            <a href="{{ route('episodes') }}" class="botonFiltro {{ (Request::is('episodios')) ? 'active' : '' }}">{{ __('global.title.showall') }}</a>
+                        </div>
+                        <div class="items_ep">
+                            @foreach ($category_episodes as $ite)
+                                @foreach ($ite->item_episodes as $item)
+                                <div class="item">
+                                    <div class="image" style="background-image: url('{{ $item->image }}')">
+                                        <a href="{{ route('episode', [Str::slug(${'item'}->{'category_episode'}->{'name' . Session::get('locale')}), $item->slug, $item->id]) }}"></a>
+                                    </div>
+                                    <div class="content">
+                                        <div class="image">
+                                            <img src="{{ $item->autor_image }}" alt="">
+                                        </div>
+                                        <div class="text">
+                                            <a href="{{ route('episode', [Str::slug(${'item'}->{'category_episode'}->{'name' . Session::get('locale')}), $item->slug, $item->id]) }}">{{ $item->name }}</a>
+                                            <p>{{ $item->autor_name }}</p>
+                                            <p>{{ \Carbon\Carbon::parse(strtotime($item->date))->formatLocalized('%d de %B de %Y') }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                @endforeach
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-@endsection
-@section('script')
-    <script>
-        $(window).on('load', function() {
-            var $container = $('.itemfilter');
-            var $filter = $('#pills-tab');
-            $container.isotope({
-                filter: '*',
-                layoutMode: 'fitRows',
-                animationOptions: {
-                    duration: 750,
-                    easing: 'linear'
-                }
-            });
-            $filter.find('span').click(function() {
-                var selector = $(this).attr('data-filter');
-                $filter.find('span').removeClass('active');
-                $(this).addClass('active');
-                $container.isotope({
-                    filter: selector,
-                    animationOptions: {
-                        animationDuration: 750,
-                        easing: 'linear',
-                        queue: false,
-                    }
-                });
-                return false;
-            });
-        });
-    </script>
+
 @endsection

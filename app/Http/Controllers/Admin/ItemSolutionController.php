@@ -59,7 +59,6 @@ class ItemSolutionController extends Controller
         $rules=[
             'category_solution_id' => 'required',
             'name' => 'required',
-            
             'slug' => 'required',
             'slider' => 'required',
             'description1' => 'required',

@@ -11,7 +11,6 @@ class Solutioncountry extends Model
     
     protected $casts = [
         'details' => 'array',
-        
     ];
 
     protected $fillable = [

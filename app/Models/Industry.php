@@ -14,5 +14,4 @@ class Industry extends Model
     protected $fillable = ["name"];
     protected $guarded = ['id'];
 
-   
 }

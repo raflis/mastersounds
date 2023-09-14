@@ -23,7 +23,7 @@ class CategoryEpisodeController extends Controller
 
     public function index()
     {
-        $category_episodes = CategoryEpisode::orderBy('id', 'Asc')->paginate();
+        $category_episodes = CategoryEpisode::orderBy('order', 'Asc')->paginate();
         return view('admin.category_episodes.index', compact('category_episodes'));
     }
 

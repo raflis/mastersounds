@@ -148,5 +148,22 @@ $(function(){
     ]
   });
 
+  $('.carousel-wizard-thanks').slick({
+    dots: false,
+    slidesToShow: 3,
+    centerPadding: '0px',
+    centerMode: false,
+    arrows: true,
+    responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }               
+    ]
+  });
+
 
 })

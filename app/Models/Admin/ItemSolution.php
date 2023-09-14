@@ -24,15 +24,18 @@ class ItemSolution extends Model
     {
         return $this->belongsTo(CategorySolution::class);
     }
+
     public function solution_country(){
         return $this->belongsToMany(Solutioncountry::class);
     }
+
     public function solution_industry(){
         return $this->belongsToMany(Solutionindustry::class);
     }
+
     public function countries()
     {
-        return $this->belongsToMany(Country::class, 'solution_country', 'solution_id',"country_id");
+        return $this->belongsToMany(Country::class, 'solution_country', 'solution_id', "country_id");
         //return $this->belongsTo(Hostingplanprice::class, "hostingplanprice_id_old", "id");
     }
     public function industries()

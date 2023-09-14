@@ -9,6 +9,7 @@ use App\Models\Record;
 use App\Models\Contact;
 use App\Models\Country;
 use App\Models\Industry;
+use App\Models\Admin\Flag;
 use App\Models\Newsletter;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -55,9 +56,11 @@ class WebController extends Controller
         $item_solution = ItemSolution::where('id', $request->input("solutionid"))->first();
         return redirect()->route('thanks', ['id' => $item_solution->id])->with('message', 'Gracias por su interés.')->with('typealert', 'success');
     }
+
     public function wizardpost(Request $request)
     {
         $pagefield = Pagefield::find(1);
+        $item_episodes = ItemEpisode::where('locale_id', Session::get('locale'))->orderBy('created_at', 'Desc')->get();
         //"_token" => "V7eWGiIKavpacHZkXkHZZ7fVjBD0MXTysZq6LcBr"
         //"step2select" => "1"
         //"step3select" => "5"
@@ -80,9 +83,9 @@ class WebController extends Controller
         $send["emailAddress"] = $request->input("email");
         $send["__rea_de_inter__s_645bf7546c3e8"] = CategorySolution::Where("id", $category)->value("name1");
         $send["firstName"] = $request->input("name");
-        $send["phoneNumber"] = $request->input("phone");
+        $send["phoneNumber"] = $request->input('flag_dial_code').$request->input('phone');
         $send["lastName"] = $request->input("lastname");
-        $send["pa__s_646e72972e4ab"] = $request->input("pais");
+        //$send["pa__s_646e72972e4ab"] = $request->input("pais");
         $send["completo_wizwrd_6489e6cb7598d"] = 1;
         /*$send["__usuarios_necesitas__647e451a6eab1"] = $minuser == 10 ? "10" : ($minuser == 100 ? "-100" : "+100");
         if ($industry == 12) {
@@ -145,16 +148,19 @@ class WebController extends Controller
             }
         }*/
 
-        return view("web.wizardresults", compact('pagefield'));
+        return view("web.wizardresults", compact('pagefield', 'item_episodes'));
     }
+
     public function wizard()
     {
         $catsol = CategorySolution::get();
         $industry = Industry::get();
         $countries = Country::get();
         $pagefield = PageField::find(1);
-        return view("web.wizard", compact("catsol", "industry", "countries", "pagefield"));
+        $flags = Flag::orderBy('name', 'Asc')->get();
+        return view("web.wizard", compact("catsol", "industry", "countries", "pagefield", 'flags'));
     }
+    
     public function changeLanguage(Request $request, $id)
     {
         $locale = Locale::where("code", $id)->first();
@@ -174,29 +180,36 @@ class WebController extends Controller
         return view('web.index', compact('pagefield', 'home_sliders', 'category_solutions', 'speakers'));
     }
 
-    public function episodes()
+    public function episodes($cat = null, $id = null)
     {
-
         $episode_sliders = EpisodeSlider::orderBy('id', 'desc')->get();
-        $category_episodes = CategoryEpisode::orderBy('id', 'desc')->get();
-        return view('web.episodes', compact('episode_sliders', 'category_episodes'));
+        $category_episodes_all = CategoryEpisode::where('order', '<>', 0)->orderBy('order', 'asc')->get();
+        if($cat && $id):
+            $category_episodes = CategoryEpisode::where('id', $id)->orWhere('order', 0)->orderBy('order', 'asc')->get();
+        else:
+            $category_episodes = CategoryEpisode::orderBy('id', 'desc')->get();
+        endif;
+
+        return view('web.episodes', compact('episode_sliders', 'category_episodes', 'category_episodes_all'));
+        
     }
 
     public function episode($category, $slug, $id)
     {
         $pagefield = PageField::find(Session::get('locale'));
         $item_episode = ItemEpisode::where('id', $id)->first();
+
         if ($item_episode != false) {
             $slugcat = Str::slug($item_episode->category_episode->{"name" . Session::get('locale')});
             if ($item_episode->slug != $slug || $category != $slugcat) {
                 //dd(Session::get('locale'));
-
                 return redirect()->route('episode', [
                     "category" => $slugcat,
                     "slug" => $item_episode->slug,
                     "id" => $item_episode->id,
                 ]);
             }
+
             $related = ItemEpisode::where('id', '<>', $id)->where('category_episode_id', $item_episode->category_episode_id)->where("locale_id", Session::get('locale'))->get();
 
             if (!is_null(Session::get('email'))) {
@@ -222,18 +235,21 @@ class WebController extends Controller
                     $params = array('objects' => $objects);
                     $res = $ssController->call("createLeads", $params);
                 }
-                return view('web.episode', compact('item_episode', 'related', 'pagefield'));
-            } else {
-                return view('web.episodemustlogin', compact('item_episode', 'related', 'pagefield'));
             }
+
+            return view('web.episode', compact('item_episode', 'related', 'pagefield'));
         } else {
             return redirect()->route("episodes");
         }
     }
 
-    public function solutions()
+    public function episodepost(Request $request)
     {
 
+    }
+
+    public function solutions()
+    {
         $solution_sliders = SolutionSlider::orderBy('order', 'Asc')->get();
         $category_solutions = CategorySolution::orderBy('order', 'Asc')->get();
         $items = [];
@@ -318,7 +334,6 @@ class WebController extends Controller
 
     public function solution($category, $slug, $id)
     {
-
         $item_solution = ItemSolution::where('id', $id)->where('slug', $slug)->first();
         $pagefield = PageField::find(Session::get('locale'));
         $pagefield_tool = PageField::find(1);
@@ -348,7 +363,6 @@ class WebController extends Controller
 
     public function posts()
     {
-
         $post_sliders = PostSlider::orderBy('order', 'Asc')->get();
         $category_posts = CategoryPost::wherehas("item_posts", function ($q) {
             $q->where("name" . Session::get("locale"), "!=", "#");
@@ -390,7 +404,6 @@ class WebController extends Controller
 
     public function contact()
     {
-
         $pagefield = PageField::find(Session::get('locale'));
         $countries = Country::get();
         return view('web.contact', compact('pagefield', 'countries'));
@@ -398,7 +411,6 @@ class WebController extends Controller
 
     public function contactSave(Request $request)
     {
-
         $rules = [
             'name' => 'required',
             'lastname' => 'required',
@@ -419,9 +431,9 @@ class WebController extends Controller
             return redirect()->route('contact.thanks')->with('message', 'Gracias por su interés.')->with('typealert', 'success');
         endif;
     }
+
     public function contactThanks()
     {
-
         return view('web.contactthanks');
     }
 
@@ -461,7 +473,6 @@ class WebController extends Controller
 
     public function newsletter()
     {
-
         $pagefield = PageField::find(Session::get('locale'));
         $countries = Country::get();
         return view('web.newsletter', compact('pagefield', 'countries'));
@@ -469,7 +480,6 @@ class WebController extends Controller
 
     public function newsletterSave(Request $request)
     {
-
         $rules = [
             'email' => 'required',
             'accepttos' => 'required',
@@ -487,9 +497,10 @@ class WebController extends Controller
             return redirect()->route('newsletter.thanks')->with('message', 'Gracias por su interés.')->with('typealert', 'success');
         endif;
     }
+
     public function episodeloginsave(Request $request)
     {
-        //print_r($request->all());
+        //return $request;
         $send = [];
         //$episode = $request->input("episode");
         $cat = $request->input("category");
@@ -512,21 +523,20 @@ class WebController extends Controller
         } else {
             $send["soluci__n_contactada_647f82d8980ff"] = 1;
             $send["newsletter_soluci__n_64833bd530d90"] = $cat;
-
             $objects[] = (object) $send;
-
             $params = array('objects' => $objects);
             $res = $ssController->call("createLeads", $params);
         }
+
         session()->put('email', trim($request->input("field_4808302595")));
         $episode = ItemEpisode::where('id', $request->input("idepisode"))->first();
         //Route::get('episodio/{category}/{slug}/{id}', [App\Http\Controllers\Web\WebController::class, 'episode'])->name('episode');
         //dd($episode);
         return redirect()->route('episode', ['id' => $episode->id, "category" => \Str::slug($episode->category_episode->name1), "slug" => \Str::slug($episode->name)]);
     }
+
     public function newsletterThanks()
     {
-
         return view('web.newsletterthanks');
     }
 

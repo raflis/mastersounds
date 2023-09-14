@@ -27,8 +27,8 @@ Route::post('wizard/results/', [App\Http\Controllers\Web\WebController::class, '
 Route::get('wizard/results/', function () {
     return redirect('wizard/');
 });
-Route::get('episodios', [App\Http\Controllers\Web\WebController::class, 'episodes'])->name('episodes');
-Route::post('episodios/login', [App\Http\Controllers\Web\WebController::class, 'episodeloginsave'])->name('episode.loginsave');
+Route::get('episodios/{cat?}/{id?}', [App\Http\Controllers\Web\WebController::class, 'episodes'])->name('episodes');
+Route::post('episodios-login', [App\Http\Controllers\Web\WebController::class, 'episodeloginsave'])->name('episode.loginsave');
 Route::get('episodio/{category}/{slug}/{id}', [App\Http\Controllers\Web\WebController::class, 'episode'])->name('episode');
 Route::get('soluciones', [App\Http\Controllers\Web\WebController::class, 'solutions'])->name('solutions');
 Route::get('solucion/{category}/{slug}/{id}', [App\Http\Controllers\Web\WebController::class, 'solution'])->name('solution');

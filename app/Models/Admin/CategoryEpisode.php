@@ -17,6 +17,6 @@ class CategoryEpisode extends Model
     public function item_episodes()
     {
         
-        return $this->hasMany(ItemEpisode::class)->where("locale_id",Session::get('locale'));
+        return $this->hasMany(ItemEpisode::class)->where("locale_id", Session::get('locale'));
     }
 }
