@@ -2,6 +2,14 @@
 
 @section('content')
 
+@php
+if(Session::get('locale') == 1){
+    $language = "ES";
+}else{
+    $language = "PT";
+}
+@endphp
+
 <section class="sec1">
     <div class="container-fluid">
         <div class="row">
@@ -13,6 +21,11 @@
                             <p>
                                 {!! nl2br(htmlspecialchars_decode(  ${'item_solution'}->{'description' .Session::get('locale')} )) !!}
                             </p>
+                            @if(${'item_solution'}->{'link_button' .Session::get('locale')} && ${'item_solution'}->{'button' .Session::get('locale')})
+                            <a target="_blank" href="{{ ${'item_solution'}->{'link_button' .Session::get('locale')} }}" class="btn-degrade">
+                                {{ ${'item_solution'}->{'button' .Session::get('locale')} }}
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -47,19 +60,34 @@
                             @endif
                         </div>
                         <div class="items mt-5">
-                        <b>{{__("global.title.applycountry")}}:
-                            {{$item_solution->countries->pluck("name")->implode(', ')}}
+                            <b>{{__("global.title.applycountry")}}:
+                                {{$item_solution->countries->pluck("name")->implode(', ')}}
 
-                        </b>
-                    </div>
+                            </b>
+                        </div>
+                        <div class="text-center mt-3">
+                            @if(${'item_solution'}->{'link_button' .Session::get('locale')} && ${'item_solution'}->{'button' .Session::get('locale')})
+                            <a target="_blank" href="{{ ${'item_solution'}->{'link_button' .Session::get('locale')} }}" class="btn-degrade">
+                                {{ ${'item_solution'}->{'button' .Session::get('locale')} }}
+                            </a>
+                            @endif
+                        </div>
                     </div>
                     <div class="content_right">
                         @if($hasValid)
                         <div class="text-center">
-                            <a href="{{ route("download",$item_solution->id) }}"  target="_blank" class="h2 link-light"><img src="{{ asset('images/download.png') }}" alt=""></a>
-                            <h2 class="mt-3"><a href="{{ route("download",$item_solution->id)  }}"   target="_blank" class="link-light text-decoration-none">{{ __("global.title.infografiadescarga") }}</a></h2>
+                            <a href="{{ route("download",$item_solution->id) }}"  target="_blank" class="h2 link-light" id="link-solution" data-category="{{ $item_solution->category_solution->name1 }}" data-name="{{ $item_solution->name }}" data-language="{{ $language }}">
+                                <img src="{{ asset('images/download.png') }}" alt="">
+                            </a>
+                            <h2 class="mt-3">
+                                <a href="{{ route("download",$item_solution->id)  }}" target="_blank" class="link-light text-decoration-none" id="link-solution" data-category="{{ $item_solution->category_solution->name1 }}" data-name="{{ $item_solution->name }}" data-language="{{ $language }}">
+                                    {{ __("global.title.infografiadescarga") }}
+                                </a>
+                            </h2>
                             @if(${'item_solution'}->{'link_button' .Session::get('locale')} && ${'item_solution'}->{'button' .Session::get('locale')})
-                            <a target="_blank" href="{{ ${'item_solution'}->{'link_button' .Session::get('locale')} }}" class="btn-vermasblue">{{ ${'item_solution'}->{'button' .Session::get('locale')} }}</a>
+                            <a target="_blank" href="{{ ${'item_solution'}->{'link_button' .Session::get('locale')} }}" class="btn-vermasblue">
+                                {{ ${'item_solution'}->{'button' .Session::get('locale')} }}
+                            </a>
                             @endif
                         </div>
                         @else
@@ -114,8 +142,10 @@
                     @endif
                 </div>
                 <div class="podcast text-light text-center">
-                    <img src="{{ asset('images/podcast.png') }}" alt="">
-                    <h3>{{ 'Podcast' }}</h3>
+                    <a href="{{ ${'item_solution'}->{'podcastlink' .Session::get('locale')} }}">
+                        <img src="{{ asset('images/podcast.png') }}" alt="">
+                        <h3>{{ 'Podcast' }}</h3>
+                    </a>
                     <p>
                         <a href="{{ ${'item_solution'}->{'podcastlink' .Session::get('locale')} }}" class="link-light text-decoration-none">
                         {!! nl2br(htmlspecialchars_decode(${'item_solution'}->{'podcast' .Session::get('locale')})) !!}

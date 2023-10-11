@@ -182,20 +182,20 @@
                         {!! Form::label('details', 'Selecciona una imagen:', ['class' => 'mt-1']) !!} <small><strong>(alto 70px)</strong></small> <code>*</code>
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <a id="lfm_images{{ $loop->iteration }}"
-                                    data-input="thumbnail_images{{ $loop->iteration }}"
-                                    data-preview="holder_images{{ $loop->iteration }}"
+                                <a id="lfm_images{{ $loop->index }}"
+                                    data-input="thumbnail_images{{ $loop->index }}"
+                                    data-preview="holder_images{{ $loop->index }}"
                                     class="btn btn-primary text-white">
                                     <i class="far fa-image"></i> Elegir
                                 </a>
                             </span>
                             {!! Form::text('details[' . $loop->index . '][image]', $item['image'], [
                                 'class' => 'form-control',
-                                'id' => 'thumbnail_images' . $loop->iteration,
+                                'id' => 'thumbnail_images' . $loop->index,
                                 'required',
                             ]) !!}
                         </div>
-                        <div id="holder_images{{ $loop->iteration }}" style="margin-top:15px;max-height:100px;">
+                        <div id="holder_images{{ $loop->index }}" style="margin-top:15px;max-height:100px;">
                             <img src="{{ $item['image'] }}" alt="" style="height:5rem">
                         </div>
                         {!! Form::label('details', 'Nombre [ES]:', ['class' => 'mt-1']) !!} <code>*</code>
@@ -339,7 +339,7 @@
         });
         @if (Route::currentRouteName() == 'item_solutions.edit')
             @foreach ($item_solution->details as $item)
-                $('#lfm_images{{ $loop->iteration }}').filemanager('image', {
+                $('#lfm_images{{ $loop->index }}').filemanager('image', {
                     prefix: route_prefix
                 });
             @endforeach

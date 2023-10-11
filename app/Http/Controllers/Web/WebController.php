@@ -266,7 +266,7 @@ class WebController extends Controller
                     if (!$has) {
                         unset($category_solution->item_solutions[$n]);
                     }
-                    if($is->slug == 'redsis' || $is->slug == 'gbm' || $is->slug == 'ricoh'){
+                    if($is->slug == 'redsis' || $is->slug == 'mdp-consulting-sac'){
                         unset($category_solution->item_solutions[$n]);
                     }
                 }
@@ -283,7 +283,7 @@ class WebController extends Controller
                     if ($has && $is->countries->count() == 1) {
                         unset($category_solution->item_solutions[$n]);
                     }
-                    if($is->slug == 'redsis' || $is->slug == 'gbm' || $is->slug == 'ricoh'){
+                    if($is->slug == 'redsis' || $is->slug == 'mdp-consulting-sac'){
                         unset($category_solution->item_solutions[$n]);
                     }
                 }

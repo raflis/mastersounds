@@ -9,9 +9,7 @@
                 <ul class="nav-bar">
                     <li><a href="">{{ __('global.title.home') }}</a></li>
                     <li><a href="{{ route('posts') }}">{{ __("global.title.news") }}</a></li>
-                    <li><a href="{{ route('posts', ['cat' => $item_post->category_post_id]) }}">{{ 
-                    ${'item_post'}->{'category_post'}->{'name' .Session::get('locale')}
-                     }}</a></li>
+                    <li><a href="{{ route('posts', ['cat' => $item_post->category_post_id]) }}">{{ ${'item_post'}->{'category_post'}->{'name' .Session::get('locale')} }}</a></li>
                     <li><a class="active">{{ ${'item_post'}->{'name' .Session::get('locale')} }}</a></li>
                 </ul>
             </div>

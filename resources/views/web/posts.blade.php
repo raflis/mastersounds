@@ -55,18 +55,16 @@
                             </li>
                         </ul>
                         <div class="contitems">
-                            <div class=" " id="pills-tabContent">
+                            <div class="" id="pills-tabContent">
                                 <div class="row row-cols-1 row-cols-md-4 g-4 d-flex align-items-stretch itemfilter">
                                     @foreach ($category_posts as $item)
                                         @foreach ($item->item_posts as $ite)
                                             @if (${'ite'}->{'name' . Session::get('locale')} != '#' && ${'ite'}->{'body' . Session::get('locale')} != '#')
                                                 <div class="col catsol-{{ $item->id }}">
-                                                    <div
-                                                        class="card bg-transparent  mb-3 rounded rounded-4 h-100 d-inline-block">
-                                                        <a
-                                                            href="{{ route('post', [Str::slug($ite->category_post->name1), $ite->slug, $ite->id]) }}"><img
-                                                                src="{{ str_replace('/Noticias/','/Noticias/thumbs/',$ite->image0) }}" class="card-img-top"
-                                                                alt="..."></a>
+                                                    <div class="card bg-transparent mb-3 rounded rounded-4 h-100 d-inline-block">
+                                                        <div class="item_post" style="background-image: url('{{ str_replace('/Noticias/','/Noticias/thumbs/',$ite->image0) }}')">
+                                                            <a href="{{ route('post', [Str::slug($ite->category_post->name1), $ite->slug, $ite->id]) }}"></a>
+                                                        </div>
                                                         <div class="card-body" style="height:160px">
                                                             <h5 class="card-title text-light">
                                                                 <a class="text-light text-decoration-none"
@@ -94,9 +92,12 @@
         </div>
     </section>
 @endsection
+
 @section("script")
+
 <script>
-$(window).on('load', function() {
+$(window).on('load', function()
+{
     var $container = $('.itemfilter');
     var $filter = $('#pills-tab');
     $container.isotope({
@@ -107,6 +108,7 @@ $(window).on('load', function() {
             easing: 'linear'
         }
     });
+
     $filter.find('span').click(function() {
         var selector = $(this).attr('data-filter');
         $filter.find('span').removeClass('active');
@@ -123,5 +125,6 @@ $(window).on('load', function() {
     });
 });
  
-    </script>
+</script>
+
 @endsection

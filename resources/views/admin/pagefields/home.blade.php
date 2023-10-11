@@ -63,7 +63,7 @@
                                         <i class="far fa-image"></i> Elegir
                                         </a>
                                     </span>
-                                    {!! Form::text('details['.$loop->iteration.'][image]', $item['image'], ['class' => 'form-control', 'id' => 'home_features'.$loop->iteration, 'required']) !!}
+                                    {!! Form::text('details['.$loop->iteration.'][image]', $item['image'], ['class' => 'form-control', 'id' => 'details'.$loop->iteration, 'required']) !!}
                                 </div>
                                 <div id="holder_home{{ $loop->iteration }}" style="margin-top:15px;max-height:100px;">
                                     <img src="{{ $item['image'] }}" alt="" style="height:5rem">
