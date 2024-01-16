@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', ($cat && $id)?$category_episode->meta['1'.Session::get('locale').'']:$pagefield->meta_title[3])
+@section('description', ($cat && $id)?$category_episode->meta['2'.Session::get('locale').'']:$pagefield->meta_description[3])
+@section('keywords', ($cat && $id)?$category_episode->meta['3'.Session::get('locale').'']:$pagefield->meta_keyword[3])
+@section('image', $pagefield->meta_image)
 @section('content')
     <section class="sec1">
         <div class="container-fluid">

@@ -13,6 +13,9 @@ class PageField extends Model
 
     protected $casts = [
         'details' => 'array',
+        'meta_title' => 'array',
+        'meta_keyword' => 'array',
+        'meta_description' => 'array',
     ];
 
     protected $fillable = [
@@ -26,6 +29,7 @@ class PageField extends Model
         'tooltip1', 'tooltip2',
         'wizard_result_text1', 'wizard_result_text2', 'wizard_result_link1', 'wizard_result_link2',
         'wizard_result_button1', 'wizard_result_button2',
+        'meta_title', 'meta_keyword', 'meta_description', 'meta_image',
     ];
 
     public static function findOrCreate($id)

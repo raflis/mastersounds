@@ -12,12 +12,13 @@ class ItemEpisode extends Model
 
     protected $casts = [
         'details' => 'array',
+        'meta' => 'array',
     ];
 
     protected $fillable = [
         'category_episode_id', 'name', 'slug', 'image',
         'body', 'link0', 'link1', 'link2', 'link3', 'link4',
-        'autor_name', 'autor_image', 'date', 'order','locale_id'
+        'autor_name', 'autor_image', 'date', 'order', 'locale_id', 'meta',
     ];
 
     public function category_episode()

@@ -1,3 +1,37 @@
+<div class="form-group col-sm-12 m-0">
+  <label class="m-0"><strong>SEO</strong></label>
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Título de la página:') }} <code>*</code>
+  {{ Form::text('meta[1]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Keywords de la página:') }} <code>*</code>
+  {{ Form::text('meta[2]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Description de la página:') }} <code>*</code>
+  {{ Form::text('meta[3]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {!! Form::label('meta_image','Imagen para compartir redes sociales:',['class'=>'']) !!} <strong>(1200 x 627px)</strong> <code>*</code>
+  <div class="input-group">
+    <span class="input-group-btn">
+        <a id="meta_lfm1" data-input="meta_thumbnail1" data-preview="meta_holder1" class="btn btn-primary text-white">
+        <i class="far fa-image"></i> Elegir
+        </a>
+    </span>
+    {!! Form::text('meta[4]', null, ['class' => 'form-control', 'id' => 'meta_thumbnail1', 'required']) !!}
+  </div>
+  <div id="meta_holder1" style="margin-top:15px;max-height:100px;">
+    @if (Route::currentRouteName()=="item_episodes.edit")
+      @if(isset($item_episode->meta['4']))
+      <img src="{{ $item_episode->meta['4'] }}" alt="" style="height:3rem">
+      @endif
+    @endif
+  </div>
+</div>
+<hr style="width: 97%">
 
 <div class="form-group col-sm-3">
   {{ Form::label('category_episode_id', 'Categoría:') }} <code>*</code>
@@ -13,6 +47,7 @@
   {{ Form::label('slug', 'URL amigable') }} <code>*</code>
   {{ Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) }}
 </div>
+
 <div class="form-group col-sm-3">
   {{ Form::label('locale_id', 'Idioma') }} <code>*</code>
   {{ Form::select('locale_id', $locales, null, ['class' => 'custom-select', 'placeholder' => 'Seleccionar Idioma', 'required']) }}
@@ -155,6 +190,7 @@
 <script>
   $('#lfm1').filemanager('image', {prefix: route_prefix});
   $('#lfm2').filemanager('image', {prefix: route_prefix});
+  $('#meta_lfm1').filemanager('image', {prefix: route_prefix});
   // $('#lfm').filemanager('file', {prefix: route_prefix});
 </script>
 

@@ -14,7 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/solucion/postback',
         '/wizard/results',
-        '/episodios/login',
+        '/episodiosLogin',
         '/newsletter/thanks',
+        '/contacto/thanks',
     ];
 }

@@ -11,11 +11,12 @@ class ItemPost extends Model
 
     protected $casts = [
         'details' => 'array',
+        'meta' => 'array',
     ];
 
     protected $fillable = [
-        'category_post_id', 'name1','name2', 'slug', 'image0', 'image',
-        'body1','body2', 'date', 'order',
+        'category_post_id', 'name1', 'name2', 'slug', 'image0', 'image',
+        'body1', 'body2', 'date', 'order', 'meta',
     ];
 
     public function category_post()

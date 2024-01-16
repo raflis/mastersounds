@@ -16,6 +16,40 @@
         </a>
         @endif
 
+        <div class="sidenav-menu-heading">SEO</div>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.titles_es'))) active @endif" 
+        href="{{ route('pagefields.titles_es') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Titles [ES]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.titles_pt'))) active @endif" 
+        href="{{ route('pagefields.titles_pt') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Titles [PT]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.keywords_es'))) active @endif" 
+        href="{{ route('pagefields.keywords_es') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Keywords [ES]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.keywords_pt'))) active @endif" 
+        href="{{ route('pagefields.keywords_pt') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Keywords [PT]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.descriptions_es'))) active @endif" 
+        href="{{ route('pagefields.descriptions_es') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Description [ES]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.descriptions_pt'))) active @endif" 
+        href="{{ route('pagefields.descriptions_pt') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Description [PT]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.image_es'))) active @endif" 
+        href="{{ route('pagefields.image_es') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Image [ES]
+        </a>
+        <a class="nav-link @if(in_array(Route::currentRouteName(), array('pagefields.image_pt'))) active @endif" 
+        href="{{ route('pagefields.image_pt') }}">
+            <i class="fas fa-home text-gray pr-1"></i> Meta Image [PT]
+        </a>
+
         <div class="sidenav-menu-heading">Páginas</div>
         @if (validatePermission('pagefields.logos', Auth::user()->permissions) == true)
         <a class="nav-link @if(preg_match("/pagefields.logos/", Route::currentRouteName())) active @endif" 

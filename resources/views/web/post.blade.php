@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', $item_post->meta['1'.Session::get('locale').''])
+@section('keywords', $item_post->meta['2'.Session::get('locale').''])
+@section('description', $item_post->meta['3'.Session::get('locale').''])
+@section('image', $item_post->meta['4'.Session::get('locale').''])
 @section('content')
 
 <section class="sec6_video">
@@ -10,7 +13,7 @@
                     <li><a href="">{{ __('global.title.home') }}</a></li>
                     <li><a href="{{ route('posts') }}">{{ __("global.title.news") }}</a></li>
                     <li><a href="{{ route('posts', ['cat' => $item_post->category_post_id]) }}">{{ ${'item_post'}->{'category_post'}->{'name' .Session::get('locale')} }}</a></li>
-                    <li><a class="active">{{ ${'item_post'}->{'name' .Session::get('locale')} }}</a></li>
+                    <li><a class="active">{{ ${'item_post'}->{'name'.Session::get('locale')} }}</a></li>
                 </ul>
             </div>
         </div>

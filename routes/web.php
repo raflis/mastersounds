@@ -28,15 +28,15 @@ Route::get('wizard/results/', function () {
     return redirect('wizard/');
 });
 Route::get('episodios/{cat?}/{id?}', [App\Http\Controllers\Web\WebController::class, 'episodes'])->name('episodes');
-Route::post('episodios-login', [App\Http\Controllers\Web\WebController::class, 'episodeloginsave'])->name('episode.loginsave');
 Route::get('episodio/{category}/{slug}/{id}', [App\Http\Controllers\Web\WebController::class, 'episode'])->name('episode');
-Route::get('soluciones', [App\Http\Controllers\Web\WebController::class, 'solutions'])->name('solutions');
+Route::post('episodiosLogin', [App\Http\Controllers\Web\WebController::class, 'episodeloginsave'])->name('episode.loginsave');
+Route::get('soluciones/{cat?}/{id?}', [App\Http\Controllers\Web\WebController::class, 'solutions'])->name('solutions');
 Route::get('solucion/{category}/{slug}/{id}', [App\Http\Controllers\Web\WebController::class, 'solution'])->name('solution');
 Route::get('solucion/{id}/download', [App\Http\Controllers\Web\WebController::class, 'solutiondownload'])->name('download');
 Route::post('solucion/postback', [App\Http\Controllers\Web\WebController::class, 'postback'])->name('solution.postback');
 Route::get('contacto', [App\Http\Controllers\Web\WebController::class, 'contact'])->name('contact');
 Route::post('contacto/send', [App\Http\Controllers\Web\WebController::class, 'contactSave'])->name('contact.save');
-Route::get('contacto/thanks', [App\Http\Controllers\Web\WebController::class, 'contactThanks'])->name('contact.thanks');
+Route::post('contacto/thanks', [App\Http\Controllers\Web\WebController::class, 'contactThanks'])->name('contact.thanks');
 Route::get('noticias', [App\Http\Controllers\Web\WebController::class, 'posts'])->name('posts');
 Route::get('noticia/{category}/{slug}/{id}', [App\Http\Controllers\Web\WebController::class, 'post'])->name('post');
 Route::post('postForm', [App\Http\Controllers\Web\WebController::class, 'postForm'])->name('post.form');

@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', $item_episode->meta['1'])
+@section('keywords', $item_episode->meta['2'])
+@section('description', $item_episode->meta['3'])
+@section('image', $item_episode->meta['4'])
 @section('content')
 
 <section class="sec6_video">
@@ -93,7 +96,7 @@
                 <div class="content">
                     <h1>{{ __('global.title.mustregistertitle') }}</h1>
                     <h3>{{ __('global.title.mustregistercontent') }}</h3>
-                    
+                    @if(Session::get('locale')==1)     
                     <!-- SharpSpring Form for Master Sounds - Newsletter Episodio  -->
                     <script type="text/javascript">
                         var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'MzEyTjFJNrTUNU1MNNM1STUw0U1KNk3WTTY2NDU3Mrc0MTRNAgA'};
@@ -104,7 +107,18 @@
                         // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
                     </script>
                     <script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
-
+                    @else
+                    <!-- SharpSpring Form for Master Sounds - Newsletter Episodio PT  -->
+                    <script type="text/javascript">
+                        var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'SzVJNjJLMUvSNU8yNtc1MUpL0k1KNE3UtTRLNbcwNjZITTQwAwA'};
+                        ss_form.width = '100%';
+                        ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
+                        ss_form.hidden = {'category': '{{$item_episode->category_episode->name2}}','idepisode': '{{$item_episode->id}}'}; // Modify this for sending hidden variables, or overriding values
+                        // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
+                        // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
+                    </script>
+                    <script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
+                    @endif
                     <p>
                         <a target="_blank" href="{{ $pagefield->file1 }}">{{ __('global.title.sendformtos') }}</a>
                     </p>

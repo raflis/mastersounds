@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', $pagefield->meta_title[4])
+@section('description', $pagefield->meta_description[4])
+@section('keywords', $pagefield->meta_keyword[4])
+@section('image', $pagefield->meta_image)
 @section('content')
     <section class="sec1">
         <div class="container-fluid">

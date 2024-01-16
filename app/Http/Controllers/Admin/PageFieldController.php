@@ -20,7 +20,7 @@ class PageFieldController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('isadmin');
-        $this->middleware('permissions')->except(['store', 'update', 'destroy', 'wizard', 'tooltip', 'wizard_result']);
+        $this->middleware('permissions')->except(['store', 'update', 'destroy', 'wizard', 'tooltip', 'wizard_result', 'titles_es', 'titles_pt', 'descriptions_es', 'descriptions_pt', 'keywords_es', 'keywords_pt', 'image_es', 'image_pt']);
     }
 
     public function home($id)
@@ -65,6 +65,54 @@ class PageFieldController extends Controller
     {
         $pagefield = PageField::find(1);
         return view('admin.pagefields.wizard_result', compact('pagefield'));
+    }
+
+    public function titles_es()
+    {
+        $pagefield = PageField::find(1);
+        return view('admin.pagefields.titles_es', compact('pagefield'));
+    }
+
+    public function titles_pt()
+    {
+        $pagefield = PageField::find(2);
+        return view('admin.pagefields.titles_pt', compact('pagefield'));
+    }
+
+    public function descriptions_es()
+    {
+        $pagefield = PageField::find(1);
+        return view('admin.pagefields.descriptions_es', compact('pagefield'));
+    }
+
+    public function descriptions_pt()
+    {
+        $pagefield = PageField::find(2);
+        return view('admin.pagefields.descriptions_pt', compact('pagefield'));
+    }
+
+    public function keywords_es()
+    {
+        $pagefield = PageField::find(1);
+        return view('admin.pagefields.keywords_es', compact('pagefield'));
+    }
+
+    public function keywords_pt()
+    {
+        $pagefield = PageField::find(2);
+        return view('admin.pagefields.keywords_pt', compact('pagefield'));
+    }
+
+    public function image_es()
+    {
+        $pagefield = PageField::find(1);
+        return view('admin.pagefields.image_es', compact('pagefield'));
+    }
+
+    public function image_pt()
+    {
+        $pagefield = PageField::find(2);
+        return view('admin.pagefields.image_pt', compact('pagefield'));
     }
 
     public function index()

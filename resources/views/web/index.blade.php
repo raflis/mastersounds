@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', $pagefield->meta_title[1])
+@section('description', $pagefield->meta_description[1])
+@section('keywords', $pagefield->meta_keyword[1])
+@section('image', $pagefield->meta_image)
 @section('content')
 
     <section class="sec1">

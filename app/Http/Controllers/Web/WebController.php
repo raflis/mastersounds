@@ -54,6 +54,7 @@ class WebController extends Controller
         }
         session()->put('ValidEmail', $request->input("field_4808302595"));
         $item_solution = ItemSolution::where('id', $request->input("solutionid"))->first();
+        session()->put('locale', $request->session_type);
         return redirect()->route('thanks', ['id' => $item_solution->id])->with('message', 'Gracias por su interés.')->with('typealert', 'success');
     }
 
@@ -182,15 +183,18 @@ class WebController extends Controller
 
     public function episodes($cat = null, $id = null)
     {
+        $pagefield = PageField::find(Session::get('locale'));
         $episode_sliders = EpisodeSlider::orderBy('id', 'desc')->get();
         $category_episodes_all = CategoryEpisode::where('order', '<>', 0)->orderBy('order', 'asc')->get();
         if($cat && $id):
             $category_episodes = CategoryEpisode::where('id', $id)->orWhere('order', 0)->orderBy('order', 'asc')->get();
+            $category_episode = CategoryEpisode::where('id', $id)->first();
         else:
-            $category_episodes = CategoryEpisode::orderBy('id', 'desc')->get();
+            $category_episodes = CategoryEpisode::orderBy('order', 'asc')->get();
+            $category_episode = [];
         endif;
-
-        return view('web.episodes', compact('episode_sliders', 'category_episodes', 'category_episodes_all'));
+        //return $category_episodes;
+        return view('web.episodes', compact('episode_sliders', 'category_episodes', 'category_episodes_all', 'pagefield', 'cat', 'id', 'category_episode'));
         
     }
 
@@ -248,11 +252,17 @@ class WebController extends Controller
 
     }
 
-    public function solutions()
+    public function solutions($cat = null, $id = null)
     {
+        $pagefield = PageField::find(Session::get('locale'));
         $solution_sliders = SolutionSlider::orderBy('order', 'Asc')->get();
-        $category_solutions = CategorySolution::orderBy('order', 'Asc')->get();
-        $items = [];
+        $category_solutions_all = CategorySolution::orderBy('order', 'asc')->get();
+        if($cat && $id):
+            $category_solutions = CategorySolution::where('id', $id)->get();
+        else:
+            $category_solutions = CategorySolution::orderBy('order', 'Asc')->get();
+        endif;
+
 
         if (Session::get("locale") == 2) {
             foreach ($category_solutions as $i => $category_solution) {
@@ -289,7 +299,7 @@ class WebController extends Controller
                 }
             }
         }
-        return view('web.solutions', compact('solution_sliders', 'category_solutions'));
+        return view('web.solutions', compact('solution_sliders', 'category_solutions_all', 'category_solutions', 'pagefield', 'cat', 'id'));
     }
 
     public function solutiondownload($id)
@@ -363,12 +373,13 @@ class WebController extends Controller
 
     public function posts()
     {
+        $pagefield = PageField::find(Session::get('locale'));
         $post_sliders = PostSlider::orderBy('order', 'Asc')->get();
         $category_posts = CategoryPost::wherehas("item_posts", function ($q) {
             $q->where("name" . Session::get("locale"), "!=", "#");
         })->orderBy('order', 'Asc')->get();
         //dd($post_sliders);
-        return view('web.posts', compact('post_sliders', 'category_posts'));
+        return view('web.posts', compact('post_sliders', 'category_posts', 'pagefield'));
     }
 
     public function post($category, $slug, $id)
@@ -432,8 +443,9 @@ class WebController extends Controller
         endif;
     }
 
-    public function contactThanks()
+    public function contactThanks(Request $request)
     {
+        session()->put('locale', $request->LocaleID);
         return view('web.contactthanks');
     }
 

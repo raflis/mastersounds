@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', ($cat && $id)?$category_solutions[0]->meta['1'.Session::get('locale').'']:$pagefield->meta_title[2])
+@section('description', ($cat && $id)?$category_solutions[0]->meta['2'.Session::get('locale').'']:$pagefield->meta_description[2])
+@section('keywords', ($cat && $id)?$category_solutions[0]->meta['3'.Session::get('locale').'']:$pagefield->meta_keyword[2])
+@section('image', $pagefield->meta_image)
 @section('content')
 
 <section class="sec1">
@@ -31,57 +34,39 @@
     </div>
 </section>
 
-@php
-$cat = Request::get('cat');
-$cat_get = ($cat)?$cat:1; 
-@endphp
-
-<section class="sec7">
+<section class="sec7_2">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="content_all">
-                    <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
-                
-                        @foreach ($category_solutions as $item)
-                        <li class="nav-item mb-3" role="presentation">
-                            <span class="botonFiltro"
-                            data-filter=".catsol-{{$item->id}}"> 
-                                {{  ${'item'}->{'name' .Session::get('locale')} }}
-                            </span>
-                        </li>
+                <div class="content">
+                    <div class="items_link">
+                        @foreach ($category_solutions_all as $item)
+                        <a href="{{ route('solutions', ['cat' => Str::slug(${'item'}->{'name' . Session::get('locale')}), 'id' => $item->id]) }}" class="botonFiltro {{ (Request::is('soluciones/'.Str::slug(${'item'}->{'name' . Session::get('locale')}).'/'.$item->id)) ? 'active' : '' }}">{{ ${'item'}->{'name' . Session::get('locale')} }}</a>
                         @endforeach
-                        <li class="nav-item mb-3" role="presentation">
-                            <span class="botonFiltro active" data-filter="*">
-                                {{ __("global.title.showall")  }}
-                            </span>
-                        </li>
-                    </ul>
-                    <div class="contitems" >
-                        <div class=" " id="pills-tabContent">
-                            <div class="row row-cols-1 row-cols-md-4 g-4 d-flex align-items-stretch itemfilter">
+                        <a href="{{ route('solutions') }}" class="botonFiltro {{ (Request::is('soluciones')) ? 'active' : '' }}">{{ __('global.title.showall') }}</a>
+                    </div>
+                    <div class="items_ep">
                         @foreach ($category_solutions as $item)
-                        
-                            
-                                @foreach ($item->item_solutions as $ite)
-<div class="col catsol-{{$item->id}}">
-<div class="card text-bg-light mb-3 rounded rounded-4 h-100 d-inline-block" >
-    
-    <div class="card-body" style="height:160px">
-      <a class="card-title text-bluebs h5blue" href="{{ route('solution', [Str::slug($ite->category_solution->name1), $ite->slug, $ite->id]) }}">{{ $ite->name }}</a>
-      <p class="card-text"> {!! nl2br(htmlspecialchars_decode(  ${'ite'}->{'description' .Session::get('locale')} )) !!}</p>
-    </div>
-    <div class="card-footer bg-transparent border-0 text-end">
-        <a href="{{ route('solution', [Str::slug($ite->category_solution->name1), $ite->slug, $ite->id]) }}" class="btn-go"><img src="{{ asset('images/arrow.png') }}" style="width: 32px" alt=""></a>
-  </div>
-  </div>
-  </div>
-  
-                             
-                                @endforeach
+                            @foreach ($item->item_solutions as $ite)
+                                <div class="item">
+                                    <div class="item_">
+                                        <div class="item_text">
+                                            <a href="{{ route('solution', [Str::slug(${'ite'}->{'category_solution'}->{'name' . Session::get('locale')}), $ite->slug, $ite->id]) }}">
+                                                {{ $ite->name }}
+                                            </a>
+                                            <p>
+                                                {!! nl2br(htmlspecialchars_decode(  ${'ite'}->{'description' .Session::get('locale')} )) !!}
+                                            </p>
+                                        </div>
+                                        <div class="item_bottom">
+                                            <a href="{{ route('solution', [Str::slug(${'ite'}->{'category_solution'}->{'name' . Session::get('locale')}), $ite->slug, $ite->id]) }}">
+                                                <img src="{{ asset('images/arrow.png') }}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         @endforeach
-                    </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -89,35 +74,4 @@ $cat_get = ($cat)?$cat:1;
     </div>
 </section>
 
-@endsection
-@section("script")
-<script>
-$(window).on('load', function() {
-    var $container = $('.itemfilter');
-    var $filter = $('#pills-tab');
-    $container.isotope({
-        filter: '*',
-        layoutMode: 'fitRows',
-        animationOptions: {
-            duration: 750,
-            easing: 'linear'
-        }
-    });
-    $filter.find('span').click(function() {
-        var selector = $(this).attr('data-filter');
-        $filter.find('span').removeClass('active');
-        $(this).addClass('active');
-        $container.isotope({
-            filter: selector,
-            animationOptions: {
-                animationDuration: 750,
-                easing: 'linear',
-                queue: false,
-            }
-        });
-        return false;
-    });
-});
- 
-    </script>
 @endsection

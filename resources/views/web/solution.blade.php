@@ -1,5 +1,8 @@
 @extends('web.layout')
-
+@section('title', $item_solution->meta['1'])
+@section('keywords', $item_solution->meta['2'])
+@section('description', $item_solution->meta['3'])
+@section('image', $pagefield->meta_image)
 @section('content')
 
 @php
@@ -94,27 +97,27 @@ if(Session::get('locale') == 1){
                         <h2>{{ __("global.title.descubremas") }}</h2>
 
                         <a name="contacto"></a>
-                        @if(Session::get('locale')==1)     
+                        @if(Session::get('locale')==1)
                         <!-- SharpSpring Form for Master Sounds - Solución CC  -->
                         <script type="text/javascript">
                             var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'SzVNSzIztjDSNU1JtNA1MUxO1k00MTDRNUhONko0MU1JS0s0BAA'};
                             ss_form.width = '100%';
                             ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
-                             ss_form.hidden = {'solutionname': '{{ $item_solution->name }}','solutionid': '{{ $item_solution->id }}','_token':'{{csrf_token()}}'}; // Modify this for sending hidden variables, or overriding values
+                            ss_form.hidden = {'solutionname': '{{ $item_solution->name }}','solutionid': '{{ $item_solution->id }}','_token':'{{csrf_token()}}', 'session_type': 1}; // Modify this for sending hidden variables, or overriding values
                             // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
                             // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
                         </script>
                         <script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
                         
                         @else
-                        <!-- SharpSpring Form for Master Sounds - Solución CC PT  -->
+                        <!-- SharpSpring Form for Master Sounds - Solución CC PT  -->
                         <script type="text/javascript">
-                        var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'MzdIMjO2SDXQNUkyt9A1MTJI1LU0sjTQTTK2SLKwSEtLNTVLBQA'};
-                        ss_form.width = '100%';
-                        ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
-                        // ss_form.hidden = {'field_id': 'value'}; // Modify this for sending hidden variables, or overriding values
-                        // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
-                        // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
+                            var ss_form = {'account': 'MzY0NDIwtbCwAAA', 'formID': 'MzdIMjO2SDXQNUkyt9A1MTJI1LU0sjTQTTK2SLKwSEtLNTVLBQA'};
+                            ss_form.width = '100%';
+                            ss_form.domain = 'app-3RUFHXUHZO.marketingautomation.services';
+                            ss_form.hidden = {'solutionname': '{{ $item_solution->name }}','solutionid': '{{ $item_solution->id }}','_token':'{{csrf_token()}}', 'session_type': 2};
+                            // ss_form.target_id = 'target'; // Optional parameter: forms will be placed inside the element with the specified id
+                            // ss_form.polling = true; // Optional parameter: set to true ONLY if your page loads dynamically and the id needs to be polled continually.
                         </script>
                         <script type="text/javascript" src="https://koi-3RUFHXUHZO.marketingautomation.services/client/form.js?ver=2.0.1"></script>
                         

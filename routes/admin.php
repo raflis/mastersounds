@@ -17,6 +17,14 @@ Route::prefix('/admin')->group(function () {
     Route::get('pagefields/wizard', [App\Http\Controllers\Admin\PageFieldController::class, 'wizard'])->name('pagefields.wizard');
     Route::get('pagefields/wizard_result', [App\Http\Controllers\Admin\PageFieldController::class, 'wizard_result'])->name('pagefields.wizard_result');
     Route::get('pagefields/tooltip', [App\Http\Controllers\Admin\PageFieldController::class, 'tooltip'])->name('pagefields.tooltip');
+    Route::get('pagefields/titles_es', [App\Http\Controllers\Admin\PageFieldController::class,'titles_es'])->name('pagefields.titles_es');
+    Route::get('pagefields/titles_pt', [App\Http\Controllers\Admin\PageFieldController::class,'titles_pt'])->name('pagefields.titles_pt');
+    Route::get('pagefields/descriptions_es', [App\Http\Controllers\Admin\PageFieldController::class,'descriptions_es'])->name('pagefields.descriptions_es');
+    Route::get('pagefields/descriptions_pt', [App\Http\Controllers\Admin\PageFieldController::class,'descriptions_pt'])->name('pagefields.descriptions_pt');
+    Route::get('pagefields/keywords_es', [App\Http\Controllers\Admin\PageFieldController::class,'keywords_es'])->name('pagefields.keywords_es');
+    Route::get('pagefields/keywords_pt', [App\Http\Controllers\Admin\PageFieldController::class,'keywords_pt'])->name('pagefields.keywords_pt');
+    Route::get('pagefields/image_es', [App\Http\Controllers\Admin\PageFieldController::class,'image_es'])->name('pagefields.image_es');
+    Route::get('pagefields/image_pt', [App\Http\Controllers\Admin\PageFieldController::class,'image_pt'])->name('pagefields.image_pt');
     Route::resource('pagefields', App\Http\Controllers\Admin\PageFieldController::class)->only(['update']);
     Route::get('users/permission/{id}/edit', [App\Http\Controllers\Admin\UserController::class, 'permissions'])->name('users.permission');
     Route::put('users/permission/{id}/edit', [App\Http\Controllers\Admin\UserController::class, 'updatePermission'])->name('users.permission.update');

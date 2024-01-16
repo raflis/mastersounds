@@ -1,3 +1,70 @@
+<div class="form-group col-sm-12 m-0">
+  <label class="m-0"><strong>SEO</strong></label>
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Título de la página [ES]:') }} <code>*</code>
+  {{ Form::text('meta[11]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Título de la página [PT]:') }} <code>*</code>
+  {{ Form::text('meta[12]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Keywords de la página [ES]:') }} <code>*</code>
+  {{ Form::text('meta[21]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Keywords de la página [PT]:') }} <code>*</code>
+  {{ Form::text('meta[22]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Description de la página [ES]:') }} <code>*</code>
+  {{ Form::text('meta[31]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+<div class="form-group col-sm-12">
+  {{ Form::label('meta', 'Description de la página [PT]:') }} <code>*</code>
+  {{ Form::text('meta[32]', null, ['class' => 'form-control', 'placeholder' => '', 'required']) }}
+</div>
+
+<div class="form-group col-sm-12">
+  {!! Form::label('meta_image','Imagen para compartir redes sociales [ES]:',['class'=>'']) !!} <strong>(1200 x 627px)</strong> <code>*</code>
+  <div class="input-group">
+    <span class="input-group-btn">
+        <a id="meta_lfm1" data-input="meta_thumbnail1" data-preview="meta_holder1" class="btn btn-primary text-white">
+        <i class="far fa-image"></i> Elegir
+        </a>
+    </span>
+    {!! Form::text('meta[41]', null, ['class' => 'form-control', 'id' => 'meta_thumbnail1', 'required']) !!}
+  </div>
+  <div id="meta_holder1" style="margin-top:15px;max-height:100px;">
+    @if (Route::currentRouteName()=="item_posts.edit")
+      @if(isset($item_post->meta['41']))
+      <img src="{{ $item_post->meta['41'] }}" alt="" style="height:3rem">
+      @endif
+    @endif
+  </div>
+</div>
+
+<div class="form-group col-sm-12">
+  {!! Form::label('meta_image','Imagen para compartir redes sociales [ES]:',['class'=>'']) !!} <strong>(1200 x 627px)</strong> <code>*</code>
+  <div class="input-group">
+    <span class="input-group-btn">
+        <a id="meta_lfm1" data-input="meta_thumbnail1" data-preview="meta_holder1" class="btn btn-primary text-white">
+        <i class="far fa-image"></i> Elegir
+        </a>
+    </span>
+    {!! Form::text('meta[42]', null, ['class' => 'form-control', 'id' => 'meta_thumbnail1', 'required']) !!}
+  </div>
+  <div id="meta_holder1" style="margin-top:15px;max-height:100px;">
+    @if (Route::currentRouteName()=="item_posts.edit")
+    @if(isset($item_post->meta['42']))
+      <img src="{{ $item_post->meta['42'] }}" alt="" style="height:3rem">
+      @endif
+    @endif
+  </div>
+</div>
+
+<hr style="width: 97%">
 
 <div class="form-group col-sm-3">
   {{ Form::label('category_post_id', 'Categoría:') }} <code>*</code>
@@ -15,7 +82,7 @@
 </div>
 <div class="form-group col-sm-3">
   {{ Form::label('slug', 'URL amigable') }} <code>*</code>
-  {{ Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) }}
+  {{ Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug', 'required']) }}
 </div>
 <div class="form-group col-sm-6">
   {!! Form::label('image0', 'Imagen del listado:', ['class'=>'mt-3']) !!} <strong>(690 x 469px)</strong><code>*</code>
@@ -29,9 +96,9 @@
   </div>
   <div id="holder2" style="margin-top:15px;max-height:100px;">
     @if (Route::currentRouteName()=="item_posts.edit")
-          <img src="{{ $item_post->image0 }}" alt="" style="height:3rem">
-      @endif
-    </div>
+      <img src="{{ $item_post->image0 }}" alt="" style="height:3rem">
+    @endif
+  </div>
 </div>
 
 <div class="form-group col-sm-6">
@@ -128,6 +195,8 @@
 <script>
   $('#lfm1').filemanager('image', {prefix: route_prefix});
   $('#lfm2').filemanager('image', {prefix: route_prefix});
+  $('#meta_lfm1').filemanager('image', {prefix: route_prefix});
+  $('#meta_lfm2').filemanager('image', {prefix: route_prefix});
   // $('#lfm').filemanager('file', {prefix: route_prefix});
 </script>
 

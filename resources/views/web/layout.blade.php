@@ -11,14 +11,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Master Sounds</title>
+
+    <title>@yield('title')</title>
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="@yield('image')" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:site_name" content="Master Sounds" />
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="routeName" content="{{ Route::currentRouteName() }}">
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/png" />
-    <meta property="og:title" content="Master Sounds" />
-    <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:image" content="{{ asset('images/banner.jpg') }}" />
-    <meta name="author" content="Marketlogic">
+    <meta name="author" content="Dennis Ormeño">
 
     <link href="{{ asset('css/app.css?v=0') }}" rel="stylesheet">
     <link href="{{ asset('css/web2.css?v='.time()) }}" rel="stylesheet">
